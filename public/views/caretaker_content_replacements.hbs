@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{page_content_replacement_title}}</title>
+    {{> head }}
+</head>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td{
+        padding: 3px;
+    }
+</style>
+
+<body>
+<div class="row wrapper">
+
+    <div class="medium-3 columns">
+        <nav>
+            {{> nav_backend }}
+            {{> nav_user_info }}
+        </nav>
+    </div>
+
+    <div class="medium-9 columns">
+
+        <main>
+
+            <div class="row columns">
+
+                <h1>{{page_content_replacement_title}}</h1>
+
+                <p>{{page_content_replacement_intro_text}}</p>
+
+                <a href="/caretaker/custom-paragraph" class="button">{{page_content_replacement_create_new}}</a>
+
+                <br>
+                <br>
+
+                <form method="POST" action="custom-paragraphs-action">
+
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                <th scope="col">{{content_replacement_title}}</th>
+                                <th scope="col">{{content_replacement_description}}</th>
+                                <th scope="col">{{content_replacement_url}}</th>
+                                <th scope="col">{{content_replacement_selector_type}}</th>
+                                <th scope="col">{{content_replacement_selector}}</th>
+                                <th scope="col">{{content_replacement_edit}}</th>
+                                <th scope="col">{{content_replacement_delete}}</th>
+                            </tr>
+
+                            {{#each contentReplacements}}
+
+                                <tr>
+                                    <td>
+                                        {{#if title}}
+                                            {{capitalizeWords title }}
+                                        {{else}}
+                                            {{ ../element_fieldset_no_title }}
+                                        {{/if}}
+                                    </td>
+                                    <td>
+                                        {{ description }}
+                                    </td>
+                                    <td style="word-wrap: break-word; word-break: break-all; min-width: 200px;">
+                                      <a href="{{url}}" target="_blank" >{{ url }}</a>
+                                    </td>
+                                    <td>
+                                        {{ selector_type }}
+                                    </td>
+                                    <td>
+                                        {{ selector }}
+                                    </td>
+                                    <td>
+                                        <a href="/caretaker/custom-paragraph?id={{ id }}" class="button" >{{../content_replacement_edit}}</a>
+                                    </td>
+                                    <td>
+                                        <input type="submit" name="delete_{{ id }}" value="{{../content_replacement_delete}}">
+                                    </td>
+                                </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

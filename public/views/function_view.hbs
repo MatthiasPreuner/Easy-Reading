@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>Welcome {{user.email}}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        table{
+            width:70%;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Your custom functions</h1>
+
+{{#if errorMessage}}
+
+    <p>
+        <strong>Error:</strong> {{errorMessage}}
+    </p>
+{{/if}}
+
+<a href="function-editor">Create a new functions</a>
+<table class="custom_functions">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Activate</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <form id="submit" method="post">
+        {{#each cutstomFunctions}}
+            <tr>
+                <td>{{this.title}}</td>
+                <td>{{this.description}}</td>
+                {{#if this.active}}
+                    <td><input type="submit" name="cf_{{this.id}}" value="deactivate"> </td>
+                {{else}}
+                    <td><input type="submit" name="cf_{{this.id}}" value="activate"> </td>
+                {{/if}}
+                <td><a href="function-editor?id={{this.id}}">Edit</a> </td>
+                <td><input type="submit" name="cf_{{this.id}}" value="delete">  </td>
+            </tr>
+        {{/each}}
+    </form>
+
+</table>
+<br>
+<a href="welcome">Back</a>
+</body>
+
+</html>

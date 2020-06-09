@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{page_caretakerlist_title}}</title>
+    {{> head }}
+    <script src="/js/audio.js"></script>
+</head>
+
+<body>
+<div class="row wrapper">
+
+    <div class="medium-3 columns">
+        <nav>
+            {{> nav_client }}
+            {{> nav_user_info }}
+        </nav>
+        {{> leave_site_info}}
+    </div>
+
+    <div class="medium-9 columns">
+
+        <main>
+
+            <div class="row columns">
+
+                <h1 id="assistants_heading">{{{createTTSButton "page_caretakerlist_title:assistants_heading,page_client_caretaker_info,caretaker_name_label,caretaker_email_label" lang}}}{{page_caretakerlist_title}}<img src="/images/assistants.png" id="assistants" alt=""></h1>
+
+
+                <p id="page_client_caretaker_info">{{page_client_caretaker_info}}</p>
+                <form id="submit" method="post">
+                    {{#if errorMessages.length}}
+                        <div data-closable class="jsFeedbackViewer alert callout alert-callout-border">
+                            <p class="jsFeedbackViewerText">
+                                {{#each errorMessages}}
+                                    <span style="display: block;">
+                                        {{#if additionalInfo}}
+                                            <strong>{{additionalInfo}}: </strong>
+                                        {{/if}}
+                                        {{message}}
+                                    </span>
+
+                                {{/each}}
+                            </p>
+                            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {{/if}}
+                    <div class="form-group">
+                        <label for="email" id="caretaker_name_label">{{caretaker_name_label}} *</label>
+                        <input type="text" class="form-control" name="name" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" id="caretaker_email_label">{{caretaker_email_label}} *</label>
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
+
+                    <input type="submit" value="{{Save}}"/>
+                </form>
+
+
+                {{#if hasClientCarerRelations}}
+
+                    <hr>
+                    <h2 class="caretaker_list_heading">{{page_caretakerlist_select}}</h2>
+                    <form id="submit" method="post">
+                        <ul class="no-bullet">
+                            {{#each existingClientCarerRelations}}
+                                <li>
+                                   <strong>{{../caretaker_name_label}}:</strong> {{name}},
+                                    <strong>{{../caretaker_email_label}}:</strong> {{ email }} <input type="submit" name="caretaker_{{id}}" value="{{../page_remove_caretaker}}">
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </form>
+
+                {{/if}}
+
+            </div>
+
+        </main>
+
+        {{>footer}}
+    </div>
+</div>
+</body>
+</html>

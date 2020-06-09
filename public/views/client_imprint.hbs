@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{page_configure_title}}</title>
+    {{> head }}
+    <script src="/js/audio.js"></script>
+</head>
+
+<body>
+<input id="data" type="hidden" value="{{convertToString engineFunctions}}">
+<div class="row wrapper">
+
+    <div class="medium-3 columns">
+        <nav>
+            {{> nav_client }}
+            {{> nav_user_info }}
+        </nav>
+        {{> leave_site_info}}
+    </div>
+
+    <div class="medium-9 columns">
+        <main>
+
+            <div class="row">
+                <div class="columns">
+                    <h1>{{imprint}}</h1>
+
+                    <hr>
+                        {{questions_about_project}}:
+                    <p>
+                    <br>
+                        Johannes Kepler Universität Linz<br>
+                        Institut Integriert Studieren<br>
+                        Altenberger Straße 69<br>
+                        4040 Linz, Österreich<br>
+                        <br>
+                        Tel.: +43 732 2468 3750<br>
+
+                        E-Mail: integriert-studieren@jku.at<br>
+                    </p>
+
+
+
+                    <p>
+                       {{website_contact}}: <a href="https://www.easyreading.eu">easyreading.eu</a>
+                    </p>
+                </div>
+
+
+
+            </div>
+        </main>
+        {{>footer}}
+    </div>
+
+
+</div>
+
+
+
+</body>
+
+</html>

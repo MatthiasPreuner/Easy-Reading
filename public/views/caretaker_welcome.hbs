@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+<head>
+    <title>{{menu_home_text}}</title>
+    {{> head }}
+</head>
+
+<body>
+    <div class="row wrapper">
+        <div class="medium-3 columns">
+            <nav>
+            {{> nav_backend }}
+            {{> nav_user_info }}
+            </nav>
+        </div>
+
+        <div class="medium-9 columns">
+            <main>
+                <div class="row column">
+                    <h1 id="message">{{e}}</h1>
+                </div>
+
+                <div class="row">
+                    <div class="column medium-12">
+                        <h1 class="page-client-welcome-intro-title">{{er_backend_title}}</h1>
+
+                        <h2 id="er_backend_what_can_you_do">{{er_backend_what_can_you_do}}</h2>
+                        <ul>
+                            <li id="test">
+                                {{er_backend_what_can_you_do_list1}}
+                            </li>
+                            <li>
+                                {{er_backend_what_can_you_do_list2}}
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                {{#hasRole user "caretaker"}}
+
+                {{else}}
+                    {{#hasRole user "client"}}
+                    <form id="submit" method="post">
+
+                        <h2>{{er_backend_upgarde_info_title}}</h2>
+                        <fieldset  class="fieldset">
+                            <legend>{{er_backend_upgarde_info}}</legend>
+                            <input id="upgrade_yes" type="radio" name="upgrade" value="yes" checked> <label for="upgrade_yes"> {{er_backend_upgarde_info_yes}}</label><br>
+                            <input id="upgrade_no" type="radio" name="upgrade" value="no"><label for="upgrade_no"> {{er_backend_upgarde_info_no}}</label><br>
+
+                            <input type="submit" name="upgrade" value="Submit">
+                        </fieldset>
+
+
+                    </form>
+                    {{/hasRole}}
+                {{/hasRole}}
+
+            </main>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

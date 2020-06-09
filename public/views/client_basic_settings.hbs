@@ -1,0 +1,643 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{page_configure_title}}</title>
+    {{> head }}
+    <script src="/js/audio.js"></script>
+    <style>
+        .tool-card-config-description{
+            margin-bottom: 20px !important;
+        }
+    </style>
+</head>
+<style>
+    body {
+        overflow-y: scroll;
+    }
+</style>
+
+<body>
+<input id="data" type="hidden" value="{{convertToString engineFunctions}}">
+<div class="row wrapper">
+
+    <div class="medium-3 columns">
+        <nav>
+            {{> nav_client }}
+            {{> nav_user_info }}
+        </nav>
+        {{> leave_site_info}}
+    </div>
+
+    <div class="medium-9 columns">
+        <main>
+            <h1 id="page_basic_setting_tittle">{{{createTTSButton "page_basic_setting_tittle,page_basic_setting_description" lang}}}{{page_basic_setting_tittle}}</h1>
+            <p id="page_basic_setting_description">{{page_basic_setting_description}}</p>
+
+
+            <!-- Language -->
+            <div class="jsToggleCardContainer card">
+                <div class="row tool-card-title">
+                    <div class="small-8 columns">
+                        <div class="tool-card-title-select">
+                            <label class="tool-card-title-select-name" id="page_basic_setting_language_title">{{{createTTSButton "page_basic_setting_language_title,page_basic_setting_language_description" lang}}}{{page_basic_setting_language_title}}</label>
+                        </div>
+                    </div>
+
+                    <div class="small-4 columns text-right">
+                        <button class="button-settings jsToggleCardButton" type="button">
+                            <span class="tool-card-title-collapse-text">{{page_configure_tool_card_collapse_settings}}</span>
+                        </button>
+                    </div>
+
+                    <div class="small-12 columns">
+                        <p class="tool-card-config-description" id="page_basic_setting_language_description">{{page_basic_setting_language_description}}</p>
+                    </div>
+                </div>
+
+                <div class="jsToggleCardTarget small-12 columns">
+                    <div class="row tool-card-config">
+
+                        <form id="submit" method="post">
+                            <fieldset>
+                                <legend id="page_basic_setting_language_description">
+                                    {{{createTTSButton supportedLanguagesTTS lang}}}
+                                    {{page_basic_setting_language_label}}
+                                </legend>
+
+                                {{#each supportedLanguages}}
+                                    {{#ifEquals userLanguage true}}
+                                        <label id="{{labelID}}"><input type="radio" name="user_language" value="{{id}}" checked>{{label}}</label>
+                                    {{else}}
+                                        <label id="{{labelID}}"><input type="radio" name="user_language" value="{{id}}">{{label}}</label>
+                                    {{/ifEquals}}
+                                {{/each}}
+
+                            </fieldset>
+                            <input type="submit" value="{{Save}}"/>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- UI CONFIGURATION -->
+            <div class="jsToggleCardContainer card">
+                <div class="row tool-card-title">
+                    <div class="small-8 columns">
+                        <div class="tool-card-title-select">
+                            <label class="tool-card-title-select-name" id="page_configure_settings_type_header">{{{createTTSButton "page_configure_settings_type_header,page_configure_settings_type_description" lang}}}{{page_configure_settings_type_header}}</label>
+                        </div>
+                    </div>
+
+                    <div class="small-4 columns text-right">
+                        <button class="button-settings jsToggleCardButton" type="button">
+                            <span class="tool-card-title-collapse-text">{{page_configure_tool_card_collapse_settings}}</span>
+                            <span class="show-for-sr">{{page_configure_settings_type_header}}</span>
+                        </button>
+                    </div>
+
+                    <div class="small-12 columns">
+                        <p class="tool-card-config-description" id="page_configure_settings_type_description">{{page_configure_settings_type_description}}</p>
+                    </div>
+                </div>
+
+                <div class="jsToggleCardTarget small-12 columns">
+
+                    <hr>
+
+                    <form id="userInterfaceForm" class="row tool-card-config">
+                        <fieldset>
+                            <legend id="page_configure_settings_type_how_to_use">
+                                {{{createTTSButton UiTTS lang}}}
+                                {{page_configure_settings_type_how_to_use}}
+                            </legend>
+                            {{#each userInterfaces}}
+                                {{#if this.active}}
+                                    <input type="radio" id="radio_ {{this.id}}" class="userInterfaceRadio"
+                                           name="userInterfaceType" data-config="uiConfig-{{this.id}}"
+                                           value="{{this.id}}" checked>
+                                {{else}}
+                                    <input type="radio" id="radio_ {{this.id}}" class="userInterfaceRadio"
+                                           name="userInterfaceType" data-config="uiConfig-{{this.id}}"
+                                           value="{{this.id}}">
+                                {{/if}}
+                                <label for="radio_ {{this.id}}" id="{{labelId}}">{{this.translatedName}}</label><br>
+                            {{/each}}
+
+                        </fieldset>
+                        <hr>
+
+                        {{#each userInterfaces}}
+
+                            <div class="uiConfigDialog" id="uiConfig-{{this.id}}" {{#unless  this.active}}
+                                 style="display: none;" {{/unless}} >
+                                {{createConfigFormForComponent this ../lang}}
+
+                            </div>
+                        {{/each}}
+
+                        <div class="text-right">
+                            <input class="tool-card-config-save-bth btn btn-primary" type="button"
+                                   onclick="saveUserInterfaceConfig(this)" value="{{Save}}"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Adaptive User Interface -->
+            <div class="jsToggleCardContainer card">
+                <div class="row tool-card-title">
+                    <div class="small-8 columns">
+                        <div class="tool-card-title-select">
+                            <label class="tool-card-title-select-name" id="adaptive_help">{{{createTTSButton "adaptive_help,adaptive_help_intro" lang}}}{{adaptive_help}}</label>
+                        </div>
+                    </div>
+
+                    <div class="small-4 columns text-right">
+                        <button class="button-settings jsToggleCardButton" type="button">
+                            <span class="tool-card-title-collapse-text">{{page_configure_tool_card_collapse_settings}}</span>
+                        </button>
+                    </div>
+
+                    <div class="small-12 columns">
+                        <p class="tool-card-config-description" id="adaptive_help_intro">{{adaptive_help_intro}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="jsToggleCardTarget small-12 columns">
+                    <div class="row tool-card-config">
+
+                        <form id="submit" method="post">
+                            <fieldset>
+                                <legend>
+                                    {{{createTTSButton "page_basic_setting_adaptable_description,page_basic_setting_adaptable_you_can_choose,page_basic_setting_adaptable_label,page_basic_setting_adaptive_label" lang}}}
+                                    <strong id="page_basic_setting_adaptable_description">{{page_basic_setting_adaptable_description}}</strong><br>
+
+                                    <span id="page_basic_setting_adaptable_you_can_choose">{{page_basic_setting_adaptable_you_can_choose}}</span>
+                                </legend>
+                                <input type="radio" id="adaptable" name="ui_mode" value="adaptable" {{#ifEquals ui_mode
+                                                                                                                "adaptable"}}
+                                       checked  {{/ifEquals}}>
+                                <label id="page_basic_setting_adaptable_label" for="adaptable"> {{page_basic_setting_adaptable_label}}</label><br>
+                                <input type="radio" id="adaptive" name="ui_mode" value="adaptive" {{#ifEquals ui_mode "adaptive"}}
+                                       checked  {{/ifEquals}}>
+                                <label id="page_basic_setting_adaptive_label" for="adaptive"> {{page_basic_setting_adaptive_label}}</label>
+                            </fieldset>
+
+                            <input type="submit" value="{{Save}}"/>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- User Tracking -->
+            <div class="jsToggleCardContainer card">
+                <div class="row tool-card-title">
+                    <div class="small-8 columns">
+                        <div class="tool-card-title-select">
+                            <label class="tool-card-title-select-name" id="automatic_help">{{{createTTSButton "automatic_help,automatic_help_intro" lang}}}{{automatic_help}}</label>
+                        </div>
+                    </div>
+
+                    <div class="small-4 columns text-right">
+                        <button class="button-settings jsToggleCardButton" type="button">
+                            <span class="tool-card-title-collapse-text">{{page_configure_tool_card_collapse_settings}}</span>
+                        </button>
+                    </div>
+
+                    <div class="small-12 columns">
+                        <p class="tool-card-config-description" id="automatic_help_intro">
+                            {{automatic_help_intro}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="jsToggleCardTarget small-12 columns">
+                    <div class="row tool-card-config">
+
+                        <form id="submit" method="post">
+                            <fieldset>
+                                <legend>
+                                    <strong id="page_basic_setting_reasoner_title">
+
+                                        {{{createTTSButton "page_basic_setting_reasoner_title,page_basic_setting_reasoner_description,page_basic_setting_reasoner_on_label,page_basic_setting_reasoner_off_label,automatic_help_warning" lang}}}
+                                        {{page_basic_setting_reasoner_title}}</strong><br>
+                                    <span id="page_basic_setting_reasoner_description"> {{page_basic_setting_reasoner_description}}</span>
+                                </legend>
+                                <input type="radio" id="reasoner_enabled" name="reasoner_on" value="enabled" {{#ifEquals reasoner_on
+                                                                                                                         "enabled"}}
+                                       checked  {{/ifEquals}}>
+                                <label id="page_basic_setting_reasoner_on_label" for="reasoner_enabled"> {{page_basic_setting_reasoner_on_label}}</label><br>
+                                <input type="radio" id="reasoner_disabled" name="reasoner_on" value="disabled" {{#ifNotEquals
+                                        reasoner_on "enabled"}} checked  {{/ifNotEquals}}>
+                                <label id="page_basic_setting_reasoner_off_label" for="reasoner_disabled"> {{page_basic_setting_reasoner_off_label}}</label><br>
+                                <label  for="reasoner_model">{{page_basic_setting_reasoner_models_label}}</label>
+                                <select id="reasoner_model" name="reasoner_model">
+                                    {{#each supportedModels}}
+                                        {{#ifEquals userModel true}}
+                                            <option value="{{id}}" selected>{{label}}</option>
+                                        {{else}}
+                                            <option value="{{id}}">{{label}}</option>
+                                        {{/ifEquals}}
+                                    {{/each}}
+                                </select>
+
+                                <p id="automatic_help_warning">{{automatic_help_warning}}</p>
+                            </fieldset>
+
+
+                            <input type="submit" value="{{Save}}"/>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+        {{>footer}}
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.userInterfaceRadio').click(function () {
+            let configDialogID = $(this).data("config");
+
+            $(".uiConfigDialog").hide();
+            $("#" + configDialogID).show();
+        });
+
+        $(".inputField").find("input[type='radio']").click(function () {
+            $(".inputField").find("input[type='radio']").parent().find("div").hide();
+            $(".inputField").find("input[type='radio']:checked").parent().find("div").show();
+        });
+
+        $(".inputField").find("input[type='radio']").parent().find("div").hide();
+        $(".inputField").find("input[type='radio']:checked").parent().find("div").show();
+    });
+
+    async function saveUserInterfaceConfig(button) {
+
+        let formData = $('#userInterfaceForm').serializeArray();
+
+
+        $(button).parents(".jsToggleCardContainer").find('.jsToggleCardTarget').slideToggle("300", function () { });
+
+
+        let event = new CustomEvent('easyReadingUpdate');
+        document.dispatchEvent(event);
+
+        await fetch('/api/v1/updateUserInterface', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                config: formData,
+                id: getUserId()
+            })
+        }).then(function (response) {
+            if (response.status === 200) {
+                setConfiguration();
+                ViewFeedback("{{Saved}}", "success")
+            } else if (response.status === 404) {
+                ViewFeedback("URL not found", "warning")
+            } else {
+                ViewFeedback(response.statusText, "alert")
+            }
+        }).catch(error => ViewFeedback(response.statusText, "alert"));
+
+        console.log(formData);
+
+    }
+
+
+    const getUserId = () => {
+        let url = new URL(window.location.href);
+
+        let query_string = url.search;
+
+        let search_params = new URLSearchParams(query_string);
+
+        let id = search_params.get('id');
+
+        return id;
+        // sessionStorage.getItem('active-user')
+    }
+
+    function updateAll() {
+        let data = JSON.parse(document.getElementById('data').value)
+        let tools = document.getElementsByClassName('tool')
+
+        for (let i = 0; i < tools.length; i++) {
+            data = updateSessionStorage(i, data)
+        }
+
+        console.log(data);
+
+        setConfiguration()
+    }
+
+    async function prepareUpdate(index, fromButton) {
+        if (fromButton) {
+            $("#enable-" + index).prop('checked', true)
+        }
+
+        let data = JSON.parse(document.getElementById('data').value);
+        updateSessionStorage(index, data);
+        updateBundleTools(index, data);
+        await setConfiguration();
+        setToolCardValues();
+    }
+
+    function updateBundleTools(index, data) {
+        const selectedTool = data[index];
+
+        if (selectedTool.bundle) {
+            data.forEach((tool, index) => {
+                if (tool.engineId === selectedTool.engineId
+                        && tool.engineVersion === selectedTool.engineVersion
+                        && tool.bundle.title === selectedTool.bundle.title) {
+
+                    document.getElementById('enable-' + index).checked = selectedTool.enable;
+                    tool.enable = selectedTool.enable;
+                }
+            });
+
+            document.getElementById('data').value = JSON.stringify(data);
+        }
+        return data;
+    }
+
+    function updateSessionStorage(index, data) {
+
+        if (data[index].configurationDataOptions && data[index].configurationDataOptions.length > 0) {
+            data[index].configurationDataOptions.forEach(dataOptions => {
+                switch (dataOptions.type.toLowerCase()) {
+                    case 'colorcombination':
+                        updateConfigForColorCombination(index, data);
+                        break;
+                    case 'colorpicker':
+                        updateConfigForByProperties(index, data);
+                        break;
+                    case 'singleselectlist':
+                        updateConfigForByProperties(index, data);
+                        break;
+                }
+            });
+        } else if (data[index].dataSchema.properties) {
+            let fields = Object.keys(data[index].dataSchema.properties)
+            let config = {}
+
+            for (let i = 0; i < fields.length; i++) {
+                config[fields[i]] = document.getElementById(fields[i] + '-' + index).value
+            }
+
+            data[index].config[0] = config
+        }
+
+        data[index].enable = document.getElementById('enable-' + index).checked ? true : false
+
+        data[index].widget = null;
+
+        if ($("#widget_input_" + data[index].uniqueId).length == 1) {
+            let selectedWidget = $("#widget_input_" + data[index].uniqueId).find("input[type='radio']:checked").val();
+            if (!selectedWidget) {
+                selectedWidget = $("#widget_input_" + data[index].uniqueId).find("input[type='hidden']").val();
+            }
+            let widget = data[index].inputTypes.filter(func => func.id === selectedWidget);
+
+
+            try {
+                if (widget.length === 1) {
+                    data[index].widget = {};
+                    data[index].widget.source = widget[0];
+
+                    if (data[index].widget.source.dataSchema) {
+                        let fields = Object.keys(data[index].widget.source.dataSchema.properties);
+                        let config = {};
+
+
+                        for (let i = 0; i < fields.length; i++) {
+                            let currentValue = $("#" + data[index].uniqueId + "_widget_" + data[index].widget.source.id + "_" + fields[i]).val();
+
+                            if (!currentValue) {
+                                currentValue = $("input[name='" + data[index].uniqueId + "_widget_" + data[index].widget.source.id + "_" + fields[i] + "']:checked").val();
+                            }
+                            config[fields[i]] = currentValue;
+                        }
+
+
+                        data[index].widget.configuration = config;
+                    }
+
+                }
+            } catch (error) {
+
+                console.log(error);
+            }
+        }
+
+        data[index].presentation = null;
+
+        if ($("#widget_output_" + data[index].uniqueId).length === 1) {
+
+            let selectedPresentation = $("#widget_output_" + data[index].uniqueId).find("input[type='radio'].component-select:checked").val();
+            if (!selectedPresentation) {
+                selectedPresentation = $("#widget_output_" + data[index].uniqueId).find("input[type='hidden'].component-select").val();
+            }
+            let presentation = data[index].outputTypes.filter(func => func.id === selectedPresentation);
+
+            try {
+                if (presentation.length === 1) {
+                    data[index].presentation = {};
+                    data[index].presentation.source = presentation[0];
+
+
+                    if (data[index].presentation.source.dataSchema) {
+                        let fields = Object.keys(data[index].presentation.source.dataSchema.properties);
+                        let configuration = {};
+
+                        for (let i = 0; i < fields.length; i++) {
+                            let currentValue = $("#" + data[index].uniqueId + "_presentation_" + data[index].presentation.source.id + "_" + fields[i]).val();
+                            if (!currentValue) {
+                                currentValue = $("input[name='" + data[index].uniqueId + "_presentation_" + data[index].presentation.source.id + "_" + fields[i] + "']:checked").val();
+                            }
+                            configuration[fields[i]] = currentValue;
+                        }
+
+                        data[index].presentation.configuration = configuration;
+                    }
+
+
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        document.getElementById('data').value = JSON.stringify(data);
+
+        console.log(data[index])
+
+        return data
+    }
+
+    function updateConfigForByProperties(index, data) {
+        const fields = Object.keys(data[index].dataSchema.properties);
+        const config = {...data[index].config[0]};
+
+        for (let i = 0; i < fields.length; i++) {
+            const node = document.getElementById(fields[i] + '-' + index);
+            if (node) {
+                config[fields[i]] = node.value;
+            }
+        }
+
+        data[index].config[0] = config;
+        return data;
+    }
+
+    function updateConfigForColorCombination(index, data) {
+        const radioButtonSelector = `input[name=${data[index].id}-${index}]:checked`;
+        const selectedValue = $(radioButtonSelector).val()
+        const colorSelected = JSON.parse(selectedValue);
+        data[index].config[0] = colorSelected;
+
+        return data;
+    }
+
+    async function setConfiguration() {
+
+        let event = new CustomEvent('easyReadingUpdate');
+        document.dispatchEvent(event);
+        {{!-- console.log(document.getElementById('data').value) --}}
+
+        await fetch('/api/v1/configuration', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                engineFunctions: document.getElementById('data').value,
+                id: getUserId()
+            })
+        })
+    }
+
+
+    function sortEngineFunctionsByEnabled() {
+        const ul = document.getElementById("jsEngineList");
+        Array.from(ul.getElementsByClassName("jsToolCard"))
+                .sort((a, b) => {
+                    const aEnable = $(a).find('[data-control-type="enable"]').get(0);
+                    const bEnable = $(b).find('[data-control-type="enable"]').get(0);
+                    const aSort = $(a).find('[data-control-type="sort-data"]').get(0);
+                    const bSort = $(b).find('[data-control-type="sort-data"]').get(0);
+
+                    if (aEnable.checked === bEnable.checked) {
+                        return aSort.value.toLowerCase().localeCompare(bSort.value.toLowerCase());
+                    } else if (aEnable.checked) {
+                        return -1;
+                    }
+                })
+                .forEach(li => ul.appendChild(li));
+    }
+
+    function setToolCardValues() {
+        const btt = $(".tool-card-title");
+        const selectedColor = "success";
+        const notSelectedColor = "";
+
+        $(".jsToolCard").each(function () {
+            if ($(this).find('[data-control-type="enable"]').get(0).checked) {
+                $(this).find(".tool-card-config-save-bth").val($(this).find(".tool-card-config-save-bth").data("savetext"))
+            } else {
+                $(this).find(".tool-card-config-save-bth").val($(this).find(".tool-card-config-save-bth").data("enablesave"))
+            }
+        })
+    }
+
+    function hideEmptySettings() {
+        Array.from($(".tool-card-config-settings")).forEach(div => {
+            if ($(div).find('[data-option-type]').length === 0) {
+                $(div).hide();
+            }
+        });
+    }
+
+    function hookToolCardsCollapseEvents() {
+        $('.tool-card-config').on('hidden.bs.collapse', function (event) {
+            const parentNode = event.currentTarget.parentNode;
+            $(parentNode).find('.tool-card-title-collapse-text').eq(0).text('{{page_configure_tool_card_collapse_settings}}');
+            showToolDescInTitleSection(parentNode);
+        });
+
+        $('.tool-card-config').on('shown.bs.collapse', function (event) {
+            const parentNode = event.currentTarget.parentNode;
+            $(parentNode).find('.tool-card-title-collapse-text').eq(0).text('{{page_configure_tool_card_collapse_close}}');
+            showToolDescInTitleSection(parentNode);
+        });
+    }
+
+    $(document).ready(function () {
+        //  sortEngineFunctionsByEnabled();
+        setToolCardValues();
+        hideEmptySettings();
+        hookToolCardsCollapseEvents();
+    });
+
+    var feedBackTimer;
+
+    function ViewFeedback(text, type) {
+        clearInterval(feedBackTimer);
+        feedBackTimer = null;
+
+        var jsFeedbackViewer = $(".jsFeedbackViewer");
+
+        jsFeedbackViewer.removeClass("hide").removeClass("primary").removeClass("secondary").removeClass("alert").removeClass("success").removeClass("warning");
+        jsFeedbackViewer.addClass(type);
+        jsFeedbackViewer.find(".jsFeedbackViewerText").text(text);
+
+        feedBackTimer = setInterval(function () {
+            jsFeedbackViewer.fadeIn(function () {
+                jsFeedbackViewer.focus();
+            });
+
+            clearInterval(feedBackTimer);
+
+            if (type === "success") {
+                feedBackTimer = setInterval(function () {
+                    clearInterval(feedBackTimer);
+
+                    jsFeedbackViewer.fadeOut(function () {
+                        jsFeedbackViewer.addClass("hide");
+                    });
+                }, 10000);
+            }
+        }, 150);
+    }
+</script>
+
+<script>
+    $(document).foundation();
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+.example_ui_grid_item{
+    max-width: 60px;
+    max-height: 60px;
+    float: left;
+}
+
+#example_ui{
+    min-height: 60px;
+}

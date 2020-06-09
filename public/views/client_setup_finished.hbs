@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{final_step_heading}}</title>
+    {{> head }}
+    <link href="/css/client-profile-setup.css" rel="stylesheet"/>
+    <script src="/js/client-setup/client-profile-setup.js"></script>
+    <script src="/js/audio.js"></script>
+
+    <script>
+
+        function start(counter) {
+            if (counter < 100) {
+                setTimeout(function () {
+                    counter++;
+
+                    let erSlideOut = $("#er-tab-slide-out-handle");
+                    if (erSlideOut.length) {
+
+                       let html = '<div class="arrow_box"><span id="bubble_audio">{{{createTTSButton "final_step_here_is_help" lang}}}</span><div id="final_step_here_is_help">{{{final_step_here_is_help}}}</div>' +
+                                '</div>';
+
+                        erSlideOut.append(html);
+                        $("#bubble_audio>button")[ 0 ].addEventListener("click", function (event) {
+                           event.stopPropagation();
+                           event.preventDefault();
+
+                           audioPlayer.playOrStop($("#bubble_audio>button")[ 0 ]);
+
+                        },true);
+                    } else {
+                        start(counter);
+                    }
+
+                }, 200);
+            }
+        }
+
+        start(0);
+
+    </script>
+
+</head>
+
+<body>
+
+<div>
+
+    <div class="row">
+        <header class="medium-12 columns header">
+            <div class="columns small-1 large-1 logo-column">
+                <img src="/images/setup/step1/logo.png" alt="EasyReading Logo" class="logo">
+            </div>
+            <div class="columns small-11 large-11 er-header">
+                <h1 id="heading1" class="heading1">{{{final_step_heading}}}</h1>
+                <hr class="header-hr">
+            </div>
+
+        </header>
+
+    </div>
+    <main>
+
+        <div class="main-container">
+            <div class="row">
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="row-header">
+
+                            <div class="columns small-1 large-1">
+                                {{{createTTSButton "final_step_complete,final_step_complete_text1,final_step_complete_text2" lang}}}
+                            </div>
+                            <div class="columns small-11 large-11">
+                                <h2  id="final_step_complete" class="heading1">{{{final_step_complete}}}</h2>
+                                <div>
+                                    <div id="final_step_complete_text1">{{{final_step_complete_text1}}}</div>
+
+                                    <div id="final_step_complete_text2">{{{final_step_complete_text2}}}</div>
+
+                                </div>
+                                <br>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="columns small-4 large-4">
+                    <a class="widget widget_large" href="configure?id={{userId}}" style="display: block">
+                        <img src="/images/setup/setup_finished/goto_settings.png" alt="Goto Settings">
+                    </a>
+                    <div class="row">
+                        <div class="columns small-12 text-center">
+                            <span id="final_step_goto_settings" class="container-info">{{{final_step_goto_settings}}}</span>
+                            <br>
+                            {{{createTTSButton "final_step_goto_settings" lang}}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+
+                <div class="columns small-4 large-4">
+                    <a class="widget widget_large" href="https://www.google.com/" style="display: block">
+                        <img src="/images/setup/setup_finished/goto_google.png" alt="Goto Google">
+                        <img src="/images/setup/setup_finished/click_symbol.png" alt="" id="goto_google_click_symbol">
+                    </a>
+                    <div class="row">
+                        <div class="columns small-12 text-center">
+                            <span id="final_step_goto_google" class="container-info">{{{final_step_goto_google}}}</span>
+                            <br>
+                            {{{createTTSButton "final_step_goto_google" lang}}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="top_arrow_box">
+
+            <img src="/images/setup/setup_finished/toolbar.png" alt="">
+            <img src="/images/setup/setup_finished/click_symbol.png" alt="" id="toolbar_click_symbol">
+            {{{createTTSButton "final_step_goto_config" lang}}}
+            <div id="final_step_goto_config">{{{final_step_goto_config}}}</div>
+
+
+
+        </div>
+
+    </main>
+</div>
+
+
+</body>
+</html>

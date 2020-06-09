@@ -1,0 +1,154 @@
+/*SITE*/
+
+#er-logo {
+    max-width: 120px;
+}
+
+html {
+    font-size: 18px;
+}
+
+main{
+    min-height: 450px;
+}
+
+/* FOOTER */
+#footer{
+    height: 50px;
+    bottom: 0;
+    left: 0;
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
+    font-size: 16px;
+}
+
+#footer ul{
+    margin:10px;
+}
+#footer li {
+    display: inline-block;
+}
+#footer .ec{
+    text-align: left;
+    line-height: 20px;
+}
+
+footer .ec_flag{
+    max-height: 50px;
+    float: left;
+    margin-right: 20px;
+}
+
+/* client welcome */
+.client_welcome_hr {
+    margin-bottom: 40px;
+}
+
+/* Client caretaker register */
+#assistants {
+    max-height: 80px;
+}
+
+#assistants_heading {
+    /*
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0px 1px 4px 0px rgba(12, 12, 12, 0.1);
+    overflow: hidden;
+    color: #111111;
+    */
+}
+
+.caretaker_list_heading {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* client configure */
+.tool-card-config-settings h4 {
+    padding-bottom: 30px;
+}
+
+.tool-card-config-settings {
+    width: 100%;
+}
+
+.radio_button_icon {
+    max-height: 50px;
+    display: inline;
+    padding-left: 20px;
+}
+
+.category-header {
+    margin-bottom: 20px;
+}
+
+.singleSelectList-option-container {
+    margin-left: 30px;
+}
+
+.input-label {
+    min-width: 150px;
+    display: inline-block;
+}
+
+.tool-card-title label {
+    font-size: 22px;
+}
+
+/* Audio Player */
+.er-audio-widget-label {
+    padding: 0;
+    text-align: right;
+}
+
+.er-audio-player {
+    /* float: left;*/
+    max-width: 40px;
+    max-height: 40px;
+    padding: 0;
+    background-color: Transparent !important;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.er-audio-player-float {
+    float: left;
+    margin-right: 20px;
+}
+
+.er-audio-player > img {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.er-audio-player:hover {
+    background-color: initial;
+}
+
+.er-audio-player.active {
+    background-color: #8FAADC !important;
+}
+
+.er-audio-player-text-highlight {
+    background-color: yellow;
+}
+
+
+/* INFO CONTAINER */
+
+.info_container{
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.info_container>img{
+    margin:auto;
+    display: block;
+}

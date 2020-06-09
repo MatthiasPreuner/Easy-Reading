@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{profile_wizard_step_3_heading}}</title>
+    {{> head }}
+    <link href="/css/client-profile-setup.css" rel="stylesheet"/>
+    <script src="/js/client-setup/client-profile-setup.js"></script>
+    <script src="/js/audio.js"></script>
+    <script src="/js/client-setup/progress.js"></script>
+
+</head>
+
+<body>
+
+<div>
+
+    <div class="row">
+        <header class="medium-12 columns header">
+            <div class="columns small-1 large-1 logo-column">
+                <img src="/images/setup/step1/logo.png" alt="EasyReading Logo" class="logo">
+            </div>
+            <div class="columns small-11 large-11 er-header">
+                <h1 id="heading1" class="heading1"  data-audio-src="heading.mp3">{{{step3_heading}}}</h1>
+                <hr class="header-hr">
+            </div>
+
+        </header>
+
+    </div>
+
+    <main>
+
+        <form id="wizard-form" method="POST" action="/client/setup">
+
+            <div class="main-container">
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="row-header">
+                            {{{createTTSButton "step3_image_search" lang}}}
+                            <h2 id="step3_image_search">
+                                {{{step3_image_search}}}
+                            </h2>
+
+                            <span class="clearfix"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row radio-button-container" aria-labelledby="desc1" data-name="multimedia_support">
+
+                    <div class="columns small-4 large-4">
+                        <div class="radio-button widget widget_large  {{#ifEquals setupInformation.[2].multimedia_support
+                                                                     "yes"}} checked {{/ifEquals}}" data-value="yes">
+                            <img src="/images/setup/step3/image_search.png" alt="">
+                        </div>
+                        <div class="row">
+
+                            <div class="columns small-12 text-center">
+                                <span id="use_image_search_yes" class="container-info">{{{use_image_search_yes}}}</span>
+                                <br>
+                                {{{createTTSButton "use_image_search_yes" lang}}}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="columns small-4 large-4">
+                        <div class="radio-button widget widget_large {{#ifEquals setupInformation.[2].multimedia_support
+                                                                    "no"}} checked {{/ifEquals}}" data-value="no">
+                            <img src="/images/setup/step3/no.png" alt="">
+                        </div>
+                        <div class="row">
+
+                            <div class="columns small-12 text-center">
+                                <span id="use_image_search_no" class="container-info">{{{use_image_search_no}}}</span>
+                                <br>
+                                {{{createTTSButton "use_image_search_no" lang}}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns small-4 large-4">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="columns large-centered progress-column">
+                    <div class="progress-container">
+                        <button id="prevButton" type="button" class="button progress-button"><img src="/images/back.png"
+                                                                                                  alt="Back"></button>
+                        <div class="progress-indicator-container">
+                            <ol class="progress-indicator">
+
+                                {{#each stepInformation}}
+                                    {{#ifEquals step "completedStep"}}
+                                        <li class="is-complete" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "currentStep"}}
+                                        <li class="is-current {{percent}}" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "upcomingStep"}}
+                                        <li class="" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                {{/each}}
+                            </ol>
+                        </div>
+                        <button id="nextButton" type="button" class="button progress-button"><img src="/images/next.png"
+                                                                                                  alt="Next"></button>
+                        <br>
+                        <span class="back-label progress-label">{{previous}}</span>
+                        <span class="next-label progress-label">{{next}}</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+
+</div>
+
+
+</body>
+</html>

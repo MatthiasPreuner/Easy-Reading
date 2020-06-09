@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>some title here</title>
+    {{> head }}
+    <link href="/css/client-profile-setup.css" rel="stylesheet"/>
+    <script src="/js/client-profile-setup.js"></script>
+
+</head>
+
+<body>
+
+<div class="row wrapper main-content">
+
+    <main>
+        <form method="POST" action="/client/setup/2">
+            <div class="medium-12 columns">
+
+
+                <div role="radiogroup" aria-labelledby="desc1" class="radio-button-container" data-name="category1">
+                    <h1 id="desc1">
+                        Do you want to be able to make the text easier to understand?
+                    </h1>
+                    <div class="radio-button" data-value="easytext">
+                        Yes, with <img src="/images/setup/step1/easytext.png" alt=""> easy
+                        text
+                    </div>
+                    <div class="radio-button checked" data-value="translation">
+                        Yes, with <br><img src="/images/setup/step1/translation.png" alt="">translation
+                    </div>
+                    <div class="radio-button" data-value="video">
+                        Yes, with <img src="/images/setup/step1/video.png" alt="">video
+                    </div>
+
+                    <div class="radio-button" data-value="none">
+                        No, just regular texts
+                    </div>
+                </div>
+
+
+                <span class="clearfix"></span>
+
+
+                <div role="group" aria-labelledby="desc2" class="checkbox-container">
+                    <h1 id="desc2">
+                        Do you want to be able to make the text easier to understand?
+                    </h1>
+                    <div class="checkbox" data-name="easytext">
+                        Yes, with <img src="/images/setup/step1/easytext.png" alt=""> easy
+                        text
+                    </div>
+                    <div class="checkbox checked" data-name="translation">
+                        Yes, with <img src="/images/setup/step1/translation.png" alt="">translation
+                    </div>
+                    <div class="checkbox" data-name="video">
+                        Yes, with <img src="/images/setup/step1/video.png" alt="">video
+                    </div>
+
+                    <div class="checkbox" data-name="none">
+                        No, just regular texts
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="columns small-6 small-centered">
+                    <div>
+                        {{#if previousStep}}
+                            <input type="hidden" value="{{nextStep}}" name="back">
+                            <input type="image" src="/images/back.png" alt="Back" name="back" class="button step-button">
+                          <!--  <a href="#" class="button step-button"><img src="/images/back.png" alt="Back"/></a>-->
+                        {{/if}}
+
+
+
+
+                        <div class="progress-indicator-container">
+                            <ol class="progress-indicator">
+
+                                {{#each stepInformation}}
+                                    {{#ifEquals step "completedStep"}}
+                                        <li class="is-complete" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "currentStep"}}
+                                        <li class="is-current" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "upcomingStep"}}
+                                        <li class="" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                {{/each}}
+                            </ol>
+                        </div>
+
+                        <input type="hidden" value="{{nextStep}}" name="step">
+                        <input type="image" src="/images/next.png" alt="Next" name="next" class="button step-button" id="">
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </main>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{step4_heading}}</title>
+    {{> head }}
+    <link href="/css/client-profile-setup.css" rel="stylesheet"/>
+    <script src="/js/client-setup/client-profile-setup.js"></script>
+    <script src="/js/audio.js"></script>
+    <script src="/js/client-setup/progress.js"></script>
+    <script>
+
+        addRadioButtonListener(function (value) {
+
+            if (value == "yes") {
+
+                $("#tts-speed-container").show();
+
+            } else {
+                $("#tts-speed-container").hide();
+            }
+        }, "symbol_support");
+
+    </script>
+
+</head>
+
+<body>
+
+<div>
+
+    <div class="row">
+        <header class="medium-12 columns header">
+            <div class="columns small-1 large-1 logo-column">
+                <img src="/images/setup/step1/logo.png" alt="EasyReading Logo" class="logo">
+            </div>
+            <div class="columns small-11 large-11 er-header">
+                <h1 id="heading1" class="heading1">{{{step4_heading}}}</h1>
+                <hr class="header-hr">
+            </div>
+
+        </header>
+
+    </div>
+
+
+    <main>
+
+        <form id="wizard-form" method="POST" action="/client/setup">
+
+            <div class="main-container">
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="row-header">
+                            <div class="er-audio-player-float">
+                                {{{createTTSButton "step4_symbol_language,use_symbol_language_text" lang}}}
+                            </div>
+                            <div>
+
+                                <h2 id="step4_symbol_language">
+                                {{{step4_symbol_language}}}
+
+                                </h2>
+
+                                <div id="use_symbol_language_text">
+                                {{{use_symbol_language_text}}}
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row radio-button-container" aria-labelledby="desc1" data-name="symbol_support">
+                    <div class="columns small-4 large-4">
+                        <div class="radio-button widget widget_large {{#ifEquals setupInformation.[3].symbol_support "yes"}} checked {{/ifEquals}}" data-value="yes">
+                            <img src="/images/setup/step4/symbol-language.png" alt="">
+                        </div>
+                        <div class="row">
+                            <div class="columns small-12 text-center">
+                                <span id="use_symbol_language_yes" class="container-info">{{{use_symbol_language_yes}}}</span>
+                                <br>
+                                {{{createTTSButton "use_symbol_language_yes" lang}}}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="columns small-4 large-4">
+                        <div class="radio-button widget widget_large {{#ifEquals setupInformation.[3].symbol_support "no"}} checked {{/ifEquals}}" data-value="no">
+                            <img src="/images/setup/step4/no.png" alt="">
+                        </div>
+
+                        <div class="row">
+                            <div class="columns small-12 text-center">
+                                <span id="use_symbol_language_no" class="container-info">{{{use_symbol_language_no}}}</span>
+                                <br>
+                                {{{createTTSButton "use_symbol_language_no" lang}}}
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="columns small-4 large-4">
+                    </div>
+                </div>
+
+
+                <!-- SECOND QUESTION -->
+                <div id="tts-speed-container" {{#ifEquals setupInformation.[3].symbol_support "yes"}} {{else}} style="display: none;" {{/ifEquals}}>
+
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <div class="row-header">
+                                {{{createTTSButton "use_symbol_language_which" lang}}}
+                                <h2 id="use_symbol_language_which">
+                                    {{{use_symbol_language_which}}}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row radio-button-container" aria-labelledby="heading1" data-name="preferred_symbol">
+                        <div class="columns small-4 large-4">
+                            <div class="radio-button widget{{#ifEquals setupInformation.[3].preferred_symbol "bliss"}} checked {{/ifEquals}}"
+                                 data-value="slow">
+                                <img src="/images/setup/step4/bliss.png" alt="">
+                            </div>
+                            <div class="row">
+                                <div class="columns small-12 text-center">
+                                    <span id="use_symbol_language_bliss" class="container-info">{{{use_symbol_language_bliss}}}</span>
+                                    <br>
+                                    {{{createTTSButton "use_symbol_language_bliss" lang}}}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="columns small-4 large-4">
+                            <div class="radio-button widget {{#ifEquals setupInformation.[3].preferred_symbol "widgit"}} checked {{/ifEquals}}"
+                                 data-value="widgit">
+                                <img src="/images/setup/step4/widgit.png" alt="">
+                            </div>
+                            <div class="row">
+                                <div class="columns small-12 text-center">
+                                    <span id="use_symbol_language_widgit" class="container-info">{{{use_symbol_language_widgit}}}</span>
+                                    <br>
+                                    {{{createTTSButton "use_symbol_language_widgit" lang}}}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="columns small-4 large-4">
+                            <div class="radio-button widget {{#ifEquals setupInformation.[3].preferred_symbol "arasaac"}} checked {{/ifEquals}}" data-value="arasaac">
+                                <img src="/images/setup/step4/arasaac.png" alt="">
+                            </div>
+                            <div class="row">
+                                <div class="columns small-12 text-center">
+                                    <span id="use_symbol_language_arasaac" class="container-info">{{{use_symbol_language_arasaac}}}</span>
+                                    <br>
+                                    {{{createTTSButton "use_symbol_language_arasaac" lang}}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="columns small-4 large-4">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="columns large-centered progress-column">
+                    <div class="progress-container">
+                        <button id="prevButton" type="button" class="button progress-button"><img
+                                    src="/images/back.png" alt="Back"></button>
+                        <div class="progress-indicator-container">
+                            <ol class="progress-indicator">
+
+                                {{#each stepInformation}}
+                                    {{#ifEquals step "completedStep"}}
+                                        <li class="is-complete" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "currentStep"}}
+                                        <li class="is-current {{percent}}" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "upcomingStep"}}
+                                        <li class="" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                {{/each}}
+                            </ol>
+                        </div>
+                        <button id="nextButton" type="button" class="button progress-button"><img src="/images/next.png"
+                                                                                                  alt="Next"></button>
+                        <br>
+                        <span class="back-label progress-label">{{previous}}</span>
+                        <span class="next-label progress-label">{{next}}</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+
+</div>
+
+
+</body>
+</html>

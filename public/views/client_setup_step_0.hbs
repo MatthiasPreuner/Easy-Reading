@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{step_0_easy_reading}}</title>
+    {{> head }}
+    <link href="/css/client-profile-setup.css" rel="stylesheet"/>
+    <script src="/js/client-setup/client-profile-setup.js"></script>
+    <script src="/js/audio.js"></script>
+
+</head>
+
+<body>
+
+<div>
+
+    <div class="row">
+        <header class="medium-12 columns header">
+            <div class="columns small-1 large-1 logo-column">
+                <img src="/images/setup/step1/logo.png" alt="EasyReading Logo" class="logo">
+            </div>
+            <div class="columns small-11 large-11 er-header">
+                <h1 id="heading1" class="heading1">{{{step_0_easy_reading}}}</h1>
+                <hr class="header-hr">
+            </div>
+
+        </header>
+
+    </div>
+
+    <main>
+        <form method="POST" action="/client/setup">
+
+            <div class="row">
+                <div class="medium-12 columns">
+                    <div class="row-header">
+                        <h2 id="welcome_to_easy_reading">
+                        {{{createTTSButton "welcome_to_easy_reading" lang}}}{{welcome_to_easy_reading}}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="columns small-2 large-2">
+                    <button class="widget widget_large container" name="personalizedProfile" formmethod="post"
+                            value="1">
+                        <img src="/images/setup/step1/account-avatar.png" alt="" class="avatar-image">
+
+                        <span class="info" id="button1_text" data-audio-src="/audio/step0/{{lang}}/button1_text.mp3">
+                            {{{create_personalized_profile_button_text}}}
+                        </span>
+                    </button>
+                </div>
+                <div class="columns small-1 large-1 tts-column">
+                    {{{createTTSButton "create_personalized_profile,create_personalized_profile_explanation_1,create_personalized_profile_explanation_2,create_personalized_profile_explanation_3" lang}}}
+                </div>
+                <div class="columns small-9 large-9">
+                    <h2 id="create_personalized_profile">{{create_personalized_profile}}
+                    </h2>
+                    <p id="create_personalized_profile_explanation_1">
+                        {{{create_personalized_profile_explanation_1}}}
+                    </p>
+                    <p id="create_personalized_profile_explanation_2">
+                        {{{create_personalized_profile_explanation_2}}}
+
+                    </p>
+                    <p id="create_personalized_profile_explanation_3">
+                        {{{create_personalized_profile_explanation_3}}}
+
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="columns small-2 large-2">
+                    <button class="widget widget_large container" name="defaultProfile" formmethod="post"
+                            value="1">
+                        <img src="/images/setup/step1/anonymous-avatar.png" alt="" class="avatar-image">
+
+                        <span id="create_default_profile_button_text">
+                            {{{create_default_profile_button_text}}}
+                        </span>
+                    </button>
+                </div>
+                <div class="columns small-1 large-1 tts-column">
+                    {{{createTTSButton "create_default_profile,create_default_profile_explanation_1,create_default_profile_explanation_2" lang}}}
+                </div>
+                <div class="columns small-9 large-9">
+                    <h2 id="create_default_profile">{{create_default_profile}}</h2>
+                    <p id="create_default_profile_explanation_1">
+                        {{{create_default_profile_explanation_1}}}
+                    </p>
+                    <p id="create_default_profile_explanation_2">
+                        {{{create_default_profile_explanation_2}}}
+                    </p>
+                </div>
+            </div>
+
+
+        </form>
+    </main>
+
+
+</div>
+
+
+</body>
+</html>

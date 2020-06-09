@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{page_content_replacement_edit_title}}</title>
+    {{> head }}
+    {{> tinymc }}
+</head>
+
+<body>
+<div class="row wrapper">
+
+    <div class="medium-3 columns">
+        <nav>
+            {{> nav_backend }}
+            {{> nav_user_info }}
+        </nav>
+
+    </div>
+
+    <div class="medium-9 columns">
+
+        <main>
+
+            <div class="row columns">
+
+                <h1>{{page_content_replacement_edit_title}}</h1>
+
+
+                <form method="POST" action="custom-paragraph">
+                    <fieldset class="fieldset">
+
+
+                        <legend>
+
+                            {{page_content_replacement_edit_legend}}
+                        </legend>
+
+                        {{#if contentReplacement}}
+
+                            <input type="hidden" name="id" value="{{contentReplacement.id}}">
+                        {{/if}}
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>{{ content_replacement_title }}
+                                    <input type="text" value="{{ contentReplacement.title }}" name="title"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>{{ content_replacement_description }}
+                                    <input type="text" value="{{ contentReplacement.description }}" name="description"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>{{ content_replacement_url}}
+                                    <input type="url" value="{{ contentReplacement.url }}" name="url" required/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label for="identifier_type">{{ content_replacement_selector_type }}  </label>
+                                <select id="identifier_type" name="selector_type">
+
+                                    {{#unless contentReplacement.selector_type}}
+
+                                        <option value="dom_selector">{{dom_selector_label}}</option>
+
+                                    {{else}}
+                                        <option value="dom_selector"
+                                            {{#ifEquals contentReplacement.selector_type "dom_selector"}}
+                                                selected
+                                            {{/ifEquals}}
+                                        > {{dom_selector_label}}</option>
+                                    {{/unless}}
+
+
+                                    <option value="w3c_selector"
+                                        {{#ifEquals contentReplacement.selector_type "w3c_selector"}}
+                                            selected
+                                        {{/ifEquals}}
+                                    > {{w3c_selector_label}}</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>{{ selector_label}}
+                                    <input type="text" value="{{ contentReplacement.selector }}" name="selector" required/>
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>{{ replacement_label }}
+                                    <textarea class="dom-content tinymce-editor" id="dom-content-{{contentReplacement.id}}"
+                                              name="replacement">{{ contentReplacement.replacement }}</textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label for="scope">{{ scope_label }}  </label>
+                                <select id="scope" name="scope">
+
+                                    {{#unless contentReplacement.scope}}
+
+                                        <option value="public" selected>{{public}}</option>
+
+                                    {{else}}
+                                        <option value="public"
+                                            {{#ifEquals contentReplacement.scope "public"}}
+                                                selected
+                                            {{/ifEquals}}
+                                        > {{public}}</option>
+                                    {{/unless}}
+
+
+                                    <option value="clients"
+                                        {{#ifEquals contentReplacement.scope "clients"}}
+                                            selected
+                                        {{/ifEquals}}
+                                    > {{clients}}
+                                    </option>
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>{{ active_label }}
+                                    {{#unless contentReplacement.scope}}
+
+                                        <input type="checkbox" value="true" name="public" checked>{{active}}</input>
+
+                                    {{else}}
+
+                                        <input type="checkbox" value="true" name="public"
+
+                                            {{#if contentReplacement.active}}
+                                               checked
+                                            {{/if}}>{{active}}
+                                        </input>
+                                    {{/unless}}
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="text-left">
+                        <input class="btn btn-primary" type="submit" value="{{ Save }}"/>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

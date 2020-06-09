@@ -1,0 +1,35 @@
+<nav>
+    <ul class="no-bullet">
+
+        {{#if user}}
+            {{#if healthcareworker}}
+                <li><a href="/">{{menu_home_text}}</a></li>
+                <li><a href="/caretaker">{{ menu_configure_toolbar_for_clients_text }}</a></li>
+            {{else}}
+                <li><a href="/client/welcome">{{menu_home_text}}</a></li>
+                <li><a href="/client/configure?id={{user.id}}">{{menu_config_your_toolbar_text}}</a></li>
+                <li><a href="/client/custom-paragraphs-overview?id={{user.id}}">{{menu_config_your_custom_dom}}</a></li>
+            {{/if}}
+
+            <li><a href="/client/caretakers">{{ menu_caretaker_list_text }}</a></li>
+        {{/if}}
+
+        {{#if user}}
+            <li><hr /></li>
+            <li><strong>{{name_text}}: </strong> <span>{{user.email}}</span></li>
+            {{#if healthcareworker}}
+                <li><strong>{{role_text}}: </strong> <span>{{ healthcareworker_role_text }}</span></li>
+            {{else}}
+                <li><strong>{{role_text}}: </strong> <span>{{ client_role_text }}</span></li>
+            {{/if}}
+        {{else}}
+            <li><strong>{{name_text}}: </strong> <span>{{anonymous_user}}</span></li>
+        {{/if}}
+
+        {{#if user}}
+            <li><a class="button" href="/client/logout">{{logout_text }}</a></li>
+        {{else}}
+            <li><a class="button" href="/login">{{ login_text }}</a></li>
+        {{/if}}
+    </ul>
+</nav>

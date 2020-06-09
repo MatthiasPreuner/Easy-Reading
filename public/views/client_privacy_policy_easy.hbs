@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>Privacy Policy</title>
+    {{> head }}
+    <script src="/js/audio.js"></script>
+</head>
+
+<body>
+<input id="data" type="hidden" value="{{convertToString engineFunctions}}">
+<div class="row wrapper">
+
+    <div class="medium-3 columns">
+        <nav>
+            {{> nav_client }}
+            {{> nav_user_info }}
+        </nav>
+        {{> leave_site_info}}
+    </div>
+
+    <div class="medium-9 columns">
+
+        <main>
+
+            <div class="row">
+                <div class="columns">
+                    {{#if (eq lang "de")}}
+                        {{> pp_de_easy}}
+                    {{else if (eq lang "sv")}}
+                        {{> pp_sv_easy}}
+                    {{else}}
+                        {{> pp_en_easy}}
+                    {{/if}}
+                </div>
+            </div>
+        </main>
+        {{>footer}}
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

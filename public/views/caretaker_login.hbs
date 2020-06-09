@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{menu_home_text}}</title>
+    {{> head }}
+     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link href="/css/login/google-login.css" rel="stylesheet" />
+    <link href="/css/login/login.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<div class="row wrapper">
+    <div class="column medium-12 align-center" style="text-align: center">
+        <img id="er-logo" src="../images/logo.png" alt="{{menu_home_text}}" title="{{menu_home_text}}">
+        <h1><span class="fa fa-lock"></span>{{easy_reading_login}}</h1>
+        <p>{{login_or_register_with}}:</p>
+        <ul class="no-bullet">
+            <li>
+                <a id="customBtn" class="customGPlusSignIn" href="caretaker/login/google">
+                    <span class="icon"></span>
+                    <span class="buttonText">Google</span>
+                </a>
+            </li>
+            <li>
+                <a href="caretaker/login/facebook" class="button"><span class="fa fa-facebook"></span> Facebook</a>
+            </li>
+
+        </ul>
+
+        <hr>
+        <a href="/" class="button">{{back}}</a>
+
+
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>{{profile_wizard_step_3_heading}}</title>
+    {{> head }}
+    <link href="/css/client-profile-setup.css" rel="stylesheet"/>
+    <script src="/js/client-setup/client-profile-setup.js"></script>
+    <script src="/js/audio.js"></script>
+    <script src="/js/client-setup/progress.js"></script>
+
+</head>
+
+<body>
+
+<div>
+    <div class="row">
+        <header class="medium-12 columns header">
+            <div class="columns small-1 large-1 logo-column">
+                <img src="/images/setup/step1/logo.png" alt="EasyReading Logo" class="logo">
+            </div>
+            <div class="columns small-11 large-11 er-header">
+                <h1 id="heading1" class="heading1">{{{step7_heading}}}</h1>
+                <hr class="header-hr">
+            </div>
+
+        </header>
+
+    </div>
+
+
+    <main>
+
+        <form id="wizard-form" method="POST" action="/client/setup">
+
+            <div class="main-container">
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="row-header">
+                            {{{createTTSButton "step7_activate_help" lang}}}
+                            <h2 id="step7_activate_help">
+                                {{{step7_activate_help}}}
+                            </h2>
+
+                            <span class="clearfix"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="radio-button-container" aria-labelledby="desc1" data-name="text_selection">
+                    <div class="row">
+
+                        <div class="columns small-2 large-2">
+
+                            <div class="radio-button widget widget_large {{#ifEquals setupInformation.[6].click
+                                                                        "click"}} checked {{/ifEquals}}"
+                                 data-value="click">
+                                <img src="/images/setup/step7/{{lang}}/mouse-click.png" alt="">
+                            </div>
+                        </div>
+                        <div class="columns small-1 large-1 tts-column">
+                            {{{createTTSButton "click_instruction_1,click_instruction_2,click_instruction_3" lang}}}
+                        </div>
+                        <div class="columns small-9 large-9">
+                            <ol>
+                                <li id="click_instruction_1"> {{{click_instruction_1}}}</li>
+                                <li id="click_instruction_2"> {{{click_instruction_2}}}</li>
+                                <li id="click_instruction_3"> {{{click_instruction_3}}}</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="columns small-2 large-2">
+                            <div class="radio-button  widget widget_large {{#ifEquals setupInformation.[6].text_selection
+                                                                         "mark"}} checked {{/ifEquals}}"
+                                 data-value="mark">
+                                <img src="/images/setup/step7/{{lang}}/mouse-mark.png" alt="">
+                            </div>
+                        </div>
+                        <div class="columns small-1 large-1 tts-column">
+                            {{{createTTSButton "mark_instruction_1,mark_instruction_2,mark_instruction_3" lang}}}
+                        </div>
+                        <div class="columns small-9 large-9">
+
+                            <ol>
+                                <li id="mark_instruction_1"> {{{mark_instruction_1}}}</li>
+                                <li id="mark_instruction_2"> {{{mark_instruction_2}}}</li>
+                                <li id="mark_instruction_3"> {{{mark_instruction_3}}}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="columns large-centered progress-column">
+                    <div class="progress-container">
+                        <button id="prevButton" type="button" class="button progress-button"><img src="/images/back.png"
+                                                                                                  alt="Back"></button>
+                        <div class="progress-indicator-container">
+                            <ol class="progress-indicator">
+
+                                {{#each stepInformation}}
+                                    {{#ifEquals step "completedStep"}}
+                                        <li class="is-complete" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "currentStep"}}
+                                        <li class="is-current {{percent}}" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals step "upcomingStep"}}
+                                        <li class="" data-step="{{stepNumber}}">
+                                        </li>
+                                    {{/ifEquals}}
+                                {{/each}}
+                            </ol>
+                        </div>
+                        <button id="nextButton" type="button" class="button progress-button"><img src="/images/next.png"
+                                                                                                  alt="Next"></button>
+                        <br>
+                        <span class="back-label progress-label">{{previous}}</span>
+                        <span class="next-label progress-label">{{next}}</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="{{lang}}">
+
+
+<head>
+    <title>Welcome {{user.email}}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/function-editor/style.css">
+    <script src="../js/function-editor/test-functions.js"></script>
+    <script src="../js/function-editor/functions.js"></script>
+    <script src="../js/function-editor/jquery-3.4.1.min.js"></script>
+    <script src="../js/function-editor/konva.min.js"></script>
+    <script src="../js/function-editor/menu.js"></script>
+    <script src="../js/function-editor/component-config-container.js"></script>
+    <script src="../js/function-editor/function-connection.js"></script>
+    <script src="../js/function-editor/input-port.js"></script>
+    <script src="../js/function-editor/output-port.js"></script>
+    <script src="../js/function-editor/function-container.js"></script>
+    <script src="../js/function-editor/erfe.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            erfe.init();
+        });
+    </script>
+</head>
+
+<body>
+<span data-functionData="{{engineFunctionDescriptions}}"></span>
+{{#if customFunctionToLoad}}
+    <span data-functiondata="{{customFunctionToLoad}}" id="customFunctionToLoad"></span>
+{{/if}}
+<form id="submit" method="post">
+<div id="app">
+    <div id="menu-container">
+        <ul role="menubar" aria-label="functions" id="appmenu">
+        </ul>
+    </div>
+    <div id="stage-parent">
+        <div id="scroll-container">
+            <div id="large-container">
+                <div id="container"></div>
+            </div>
+        </div>
+        <div id="component-config-container"></div>
+    </div>
+    <div id="footerMenu">
+        <fieldset>
+            <legend>Function information</legend>
+            <label for="function-title">Name</label><input type="text" id="function-title"><br>
+            <label for="function-description">Description</label>
+            <textarea rows = "5" cols = "50" id="function-description"></textarea>
+        </fieldset>
+
+    </div>
+
+</div>
+
+    <input type="hidden" id="erfeSubmit" name="erfeSubmit" value="">
+    <input type="hidden" id="erfeFunctionId" name="erfeFunctionId" value="">
+</form>
+</body>
+
+</html>

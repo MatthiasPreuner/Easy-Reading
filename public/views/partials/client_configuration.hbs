@@ -1,0 +1,646 @@
+<div class="row">
+    <div class="columns">
+        <h1 id="page_configure_title">{{{createTTSButton "page_configure_title,page_configure_description" lang}}}{{page_configure_title}}</h1>
+        <p id="page_configure_description">{{page_configure_description}}</p>
+
+        <!--<h2>page_configure_tool_section_tile</h2>-->
+
+        <!--<ul class="no-bullet" id="jsEngineList">-->
+
+        {{#each engineFunctions}}
+
+            {{#if firstCategoryElement}}
+
+                <hr>
+                <h2 class="category-header">{{categoryName}}</h2>
+            <ul class="no-bullet" >
+
+            {{/if}}
+
+            <li class="jsToggleCardContainer jsToolCard">
+                <form class="card">
+
+                    <input data-control-type="sort-data" type="hidden"
+                           value="{{engineId}}{{engineVersion}}{{sortOrder}}{{title}}"/>
+                    <h3 class="show-for-sr">{{title}}</h3>
+
+                    <div class="row tool-card-title">
+                        <div class="small-8 columns">
+                            <div class="tool-card-title-select">
+                                {{addEnableCheckBox this @index}}
+                                {{addEnableCheckBoxLabel title defaultIcon @index }}
+                            </div>
+                        </div>
+
+                        <div class="small-4 columns text-right">
+                            <button class="button-settings jsToggleCardButton" type="button">
+                                <span class="tool-card-title-collapse-text">{{../page_configure_tool_card_collapse_settings}}</span>
+                                <span class="show-for-sr">{{title}}</span>
+                            </button>
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="tool-{{@index}}" class="row tool-card-config jsToggleCardTarget">
+                        <div class="small-12 columns">
+
+                            <!-- Description and howTo use for only TTS button -->
+                            {{#hasValue description howToUse}}
+                                <p class="tool-card-config-description" id="tool_description_{{@index}}">
+                                    {{{createTTSButton (concat descriptionId ":tool_description_" @index "," howToUseId ":tool_how_to_use_" @index) ../lang}}}
+                                    {{description}}
+                                </p>
+                                <p>
+                                    <span class="tool-card-config-howto-text" id="tool_how_to_use_{{@index}}">{{howToUse}}</span>
+                                </p>
+                            {{else}}
+
+                                {{#hasValue description}}
+                                    <p class="tool-card-config-description" id="tool_description_{{@index}}">{{{createTTSButton (concat descriptionId ":tool_description_" @index) ../lang}}}{{description}}</p>
+                                {{/hasValue}}
+                                {{#hasValue howToUse}}
+                                    <p>
+                                        <span class="tool-card-config-howto-text" id="tool_how_to_use_{{@index}}">{{{createTTSButton (concat howToUseId ":tool_how_to_use_" @index) ../lang}}}{{howToUse}}</span>
+                                    </p>
+                                {{/hasValue}}
+                            {{/hasValue}}
+
+
+
+
+
+                        </div>
+
+
+                        <div class="small-12 columns">
+                            <br/>
+
+                            <div class="config-howto-wrapper">
+                                <div>
+                                    {{{renderTextualDescription textualDescription ../lang @index}}}
+                                </div>
+                                {{#componentListNeedsToBeRendered inputTypes}}
+                                    <hr>
+                                    <div class="jsToggleCardContainer2 card">
+                                        <div class="row tool-card-title">
+                                            <div class="small-8 columns">
+                                                <div class="tool-card-title-select">
+                                                    <h3 class="tool-card-title-select-name">{{../page_configure_tool_how_to_use}}</h3>
+                                                </div>
+                                            </div>
+
+                                            <div class="small-4 columns text-right">
+                                                {{#configurationNeedsToBeRendered inputTypes}}
+                                                    <button class="button-settings jsToggleCardButton2" type="button">
+                                                        <span class="tool-card-title-collapse-text">{{../change_widget_button_label}}</span>
+                                                    </button>
+                                                {{else}}
+                                                    &nbsp;
+                                                {{/configurationNeedsToBeRendered}}
+                                            </div>
+
+                                            {{createTextualDescriptionForComponentList inputTypes uniqueId "input" widget ../lang @index}}
+                                        </div>
+
+                                        <!--Configuration for multiple elements -->
+                                        {{#configurationNeedsToBeRendered inputTypes}}
+                                            <div class="jsToggleCardTarget2 small-12 columns">
+
+
+                                                <div class="row tool-card-config">
+
+                                                    {{#checklength inputTypes 1}}
+                                                        <h2> {{../select_single_widget_title}}</h2>
+                                                    {{else}}
+                                                        <h2> {{../select_multiple_widget_title}}</h2>
+                                                    {{/checklength}}
+
+                                                    {{createConfigFormForComponentList inputTypes uniqueId "input" widget ../select_multiple_widget_legend ../lang @index}}
+
+                                                </div>
+
+                                            </div>
+                                        {{else}}
+                                            <!--Configuration for single elements -->
+                                            {{createConfigFormForComponentList inputTypes uniqueId "input" widget ../select_multiple_widget_legend ../lang @index}}
+
+                                        {{/configurationNeedsToBeRendered}}
+
+                                    </div>
+
+                                    <hr/>
+
+                                {{else}}
+                                    <!--hidden config for single element without schema -->
+                                    {{createConfigFormForComponentList inputTypes uniqueId "input" widget ../select_multiple_widget_legend ../lang @index}}
+                                {{/componentListNeedsToBeRendered}}
+
+                            </div>
+
+                            <!--
+                                            <div class="config-about-wrapper">
+                                                <h4 class="tool-card-config-about-heading">{{../page_configure_tool_about}}</h4>
+                                                <p>
+                                                    <a class="tool-card-config-about-link" href="{{sourceUrl}}"
+                                                       target="_blank">{{sourceTitle}}</a>
+                                                    <br>
+                                                    <span class="tool-card-config-about-engine">{{engineId}} {{engineVersion}}</span>
+                                                </p>
+                                            </div>
+                                            -->
+
+
+
+                            <div class="tool-card-config-settings">
+                                <h4>{{../page_configure_tool_settings_title}}</h4>
+                                {{addInputField this @index ../lang}}
+                            </div>
+
+
+
+
+                            {{#componentListNeedsToBeRendered outputTypes}}
+                                <hr>
+                                {{createTextualDescriptionForComponentList outputTypes uniqueId "output" presentation ../lang @index}}
+
+                                {{#checklength outputTypes 1}}
+                                    <h2> {{../select_single_presentation_title}}</h2>
+                                {{else}}
+                                    <h2> {{../select_multiple_presentation_title}}</h2>
+                                {{/checklength}}
+                            {{/componentListNeedsToBeRendered}}
+                            {{createConfigFormForComponentList outputTypes uniqueId "output" presentation ../select_multiple_presentation_legend ../lang @index}}
+
+
+                            <div class="text-right">
+                                <input class="tool-card-config-save-bth btn btn-primary" type="button"
+                                       data-SaveText="{{../Save}}" data-EnableSave="{{../EnableSave}}"
+                                       value="{{../Save}}" onclick="prepareUpdate('{{@index}}', this)"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </li>
+
+            {{#if lastCategoryElement}}
+
+            </ul>
+            {{/if}}
+        {{/each}}
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.userInterfaceRadio').click(function () {
+            let configDialogID = $(this).data("config");
+
+            $(".uiConfigDialog").hide();
+            $("#" + configDialogID).show();
+        });
+
+        $(".inputField").find("input[type='radio']").click(function () {
+            $(".inputField").find("input[type='radio']").parent().find("div").hide();
+            $(".inputField").find("input[type='radio']:checked").parent().find("div").show();
+        });
+
+        $(".inputField").find("input[type='radio']").parent().find("div").hide();
+        $(".inputField").find("input[type='radio']:checked").parent().find("div").show();
+    });
+
+    async function saveUserInterfaceConfig() {
+
+        let formData = $('#userInterfaceForm').serializeArray();
+
+        let event = new CustomEvent('easyReadingUpdate');
+        document.dispatchEvent(event);
+
+        await fetch('/api/v1/updateUserInterface', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                config: formData,
+                id: getUserId()
+            })
+        }).then(function (response) {
+            if (response.status === 200) {
+                setConfiguration();
+                ViewFeedback("{{Saved}}", "success")
+            } else if (response.status === 404) {
+                ViewFeedback("URL not found", "warning")
+            } else {
+                ViewFeedback(response.statusText, "alert")
+            }
+        }).catch(error => ViewFeedback(response.statusText, "alert"));
+
+        console.log(formData);
+
+    }
+
+
+    const getUserId = () => {
+        let url = new URL(window.location.href);
+
+        let query_string = url.search;
+
+        let search_params = new URLSearchParams(query_string);
+
+        let id = search_params.get('id');
+
+        return id;
+        // sessionStorage.getItem('active-user')
+    }
+
+    function updateAll() {
+        let data = JSON.parse(document.getElementById('data').value)
+        let tools = document.getElementsByClassName('tool')
+
+        for (let i = 0; i < tools.length; i++) {
+            data = updateSessionStorage(i, data)
+        }
+
+
+        setConfiguration()
+    }
+
+    async function prepareUpdate(index, fromButton) {
+
+        if (fromButton) {
+            $("#enable-" + index).prop('checked', true);
+
+            $(fromButton).parents(".jsToggleCardContainer").find('.jsToggleCardTarget').slideToggle("300", function () { });
+
+
+            if($(fromButton).parents(".jsToggleCardContainer").first()[0].getBoundingClientRect().top < 0){
+                $('html, body').animate({
+                    scrollTop: $(fromButton).parents(".jsToggleCardContainer").offset().top-20
+                }, 300);
+            }
+
+        }
+
+        let data = JSON.parse(document.getElementById('data').value);
+        updateSessionStorage(index, data);
+        updateBundleTools(index, data);
+        await setConfiguration();
+        setToolCardValues();
+    }
+
+    function updateBundleTools(index, data) {
+        const selectedTool = data[index];
+
+        if (selectedTool.bundle) {
+            data.forEach((tool, index) => {
+                if (tool.engineId === selectedTool.engineId
+                        && tool.engineVersion === selectedTool.engineVersion
+                        && tool.bundle.title === selectedTool.bundle.title) {
+
+                    document.getElementById('enable-' + index).checked = selectedTool.enable;
+                    tool.enable = selectedTool.enable;
+                }
+            });
+
+            document.getElementById('data').value = JSON.stringify(data);
+        }
+        return data;
+    }
+
+    function updateSessionStorage(index, data) {
+
+        if (data[index].configurationDataOptions && data[index].configurationDataOptions.length > 0) {
+            data[index].configurationDataOptions.forEach(dataOptions => {
+                switch (dataOptions.type.toLowerCase()) {
+                    case 'colorcombination':
+                        updateConfigForColorCombination(index, data);
+                        break;
+                    case 'colorpicker':
+                        updateConfigForByProperties(index, data);
+                        break;
+                    case 'singleselectlist':
+                        updateConfigForByProperties(index, data);
+                        break;
+                }
+            });
+        } else if (data[index].dataSchema.properties) {
+            let fields = Object.keys(data[index].dataSchema.properties)
+            let config = {}
+
+            for (let i = 0; i < fields.length; i++) {
+                config[fields[i]] = document.getElementById(fields[i] + '-' + index).value
+            }
+
+            data[index].config[0] = config
+        }
+
+        data[index].enable = document.getElementById('enable-' + index).checked ? true : false
+
+        data[index].widget = null;
+
+        if ($("#widget_input_"+data[index].uniqueId).length==1){
+            let selectedWidget = $("#widget_input_"+data[index].uniqueId).find("input[type='radio']:checked").val();
+            if(!selectedWidget){
+                selectedWidget = $("#widget_input_"+data[index].uniqueId).find("input[type='hidden']").val();
+            }
+            let widget = data[index].inputTypes.filter(func => func.id === selectedWidget);
+
+
+
+            try {
+                if (widget.length===1) {
+                    data[index].widget = {};
+                    data[index].widget.source = widget[0];
+
+                    if(data[index].widget.source.dataSchema){
+                        if(data[index].widget.source.dataSchema.properties){
+                            let fields = Object.keys(data[index].widget.source.dataSchema.properties);
+                            let config = {};
+
+
+                            for (let i = 0; i < fields.length; i++) {
+                                let currentValue = $("#"+data[index].uniqueId+"_widget_"+data[index].widget.source.id+"_"+ fields[i]).val();
+
+                                if(!currentValue){
+                                    currentValue = $("input[name='"+data[index].uniqueId+"_widget_"+data[index].widget.source.id+"_"+ fields[i]+"']:checked").val();
+                                }
+                                config[fields[i]] = currentValue;
+                            }
+
+
+                            data[index].widget.configuration = config;
+                        }
+
+                    }
+
+                }
+            } catch(error) {
+
+
+                console.log(error);
+            }
+        }
+
+        data[index].presentation = null;
+
+        if ($("#widget_output_"+data[index].uniqueId).length===1){
+
+            let selectedPresentation = $("#widget_output_"+data[index].uniqueId).find("input[type='radio'].component-select:checked").val();
+            if(!selectedPresentation){
+                selectedPresentation = $("#widget_output_"+data[index].uniqueId).find("input[type='hidden'].component-select").val();
+            }
+            let presentation = data[index].outputTypes.filter(func => func.id === selectedPresentation);
+
+            try {
+                if (presentation.length===1) {
+                    data[index].presentation = {};
+                    data[index].presentation.source = presentation[0];
+
+
+                    if(data[index].presentation.source.dataSchema){
+                        if(data[index].presentation.source.dataSchema.properties) {
+                            let fields = Object.keys(data[index].presentation.source.dataSchema.properties);
+                            let configuration = {};
+
+                            for (let i = 0; i < fields.length; i++) {
+                                let currentValue = $("#" + data[index].uniqueId + "_presentation_" + data[index].presentation.source.id + "_" + fields[i]).val();
+                                if (!currentValue) {
+                                    currentValue = $("input[name='" + data[index].uniqueId + "_presentation_" + data[index].presentation.source.id + "_" + fields[i] + "']:checked").val();
+                                }
+                                configuration[fields[i]] = currentValue;
+                            }
+
+                            data[index].presentation.configuration = configuration;
+                        }
+                    }
+
+
+
+                }
+            } catch(error) {
+                console.log(error);
+            }
+        }
+
+        document.getElementById('data').value = JSON.stringify(data);
+
+        console.log(data[index])
+
+        return data
+    }
+
+    function updateConfigForByProperties(index, data) {
+        const fields = Object.keys(data[index].dataSchema.properties);
+        const config = {...data[index].config[0]};
+
+        for (let i = 0; i < fields.length; i++) {
+            let node = document.getElementById(fields[i] + '-' + index);
+            if (node) {
+                config[fields[i]] = node.value;
+            }else{
+
+                let value = $("input[name='"+fields[i] + '-' + index+"']:checked"). val();
+                console.log(value);
+                if(value){
+                    config[fields[i]] = value;
+                }
+            }
+        }
+
+        data[index].config[0] = config;
+        return data;
+    }
+
+    function updateConfigForColorCombination(index, data) {
+        const radioButtonSelector = `input[name=${data[index].id}-${index}]:checked`;
+        const selectedValue = $(radioButtonSelector).val()
+        const colorSelected = JSON.parse(selectedValue);
+        data[index].config[0] = colorSelected;
+
+        return data;
+    }
+
+    async function setConfiguration() {
+
+        let event = new CustomEvent('easyReadingUpdate');
+        document.dispatchEvent(event);
+        {{!-- console.log(document.getElementById('data').value) --}}
+
+        let configurationData = JSON.parse(document.getElementById('data').value);
+        let dataToSend = [];
+        for(let i=0; i < configurationData.length; i++){
+
+            let engineData = {
+                id: configurationData[i].id,
+                engineId:configurationData[i].engineId,
+                engineVersion: configurationData[i].engineVersion,
+                config: configurationData[i].config,
+                enable: configurationData[i].enable,
+                widget: {
+                    source: {
+                        id: configurationData[i].widget.source.id,
+                        version: configurationData[i].widget.source.version,
+                    }
+                },
+                presentation: {
+
+                }
+
+            };
+
+            if(configurationData[i].widget.configuration){
+                engineData.widget.cofiguration = configurationData[i].widget.configuration;
+            }
+
+            if(configurationData[i].presentation){
+
+                if(configurationData[i].presentation.source){
+                    engineData.presentation = {
+                        source:{
+                            id: configurationData[i].presentation.source.id,
+                            version: configurationData[i].presentation.source.version,
+                        }
+                    };
+
+
+                    if(configurationData[i].presentation.configuration){
+                        engineData.presentation.configuration = configurationData[i].presentation.configuration;
+                    }
+                }
+
+
+            }
+
+            dataToSend.push(engineData);
+
+        }
+        console.log(dataToSend);
+
+        await fetch('/api/v1/configuration', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                //  engineFunctions: document.getElementById('data').value,
+                engineFunctions: JSON.stringify(dataToSend),
+                id: getUserId()
+            })
+        })
+    }
+
+
+    //Not needed any more.
+    function sortEngineFunctionsByEnabled() {
+        return;
+
+        const ul = document.getElementById("jsEngineList");
+        Array.from(ul.getElementsByClassName("jsToolCard"))
+                .sort((a, b) => {
+                    const aEnable = $(a).find('[data-control-type="enable"]').get(0);
+                    const bEnable = $(b).find('[data-control-type="enable"]').get(0);
+                    const aSort = $(a).find('[data-control-type="sort-data"]').get(0);
+                    const bSort = $(b).find('[data-control-type="sort-data"]').get(0);
+
+                    if (aEnable.checked === bEnable.checked) {
+                        return aSort.value.toLowerCase().localeCompare(bSort.value.toLowerCase());
+                    } else if (aEnable.checked) {
+                        return -1;
+                    }
+                })
+                .forEach(li => ul.appendChild(li));
+    }
+
+    function setToolCardValues() {
+        const btt = $(".tool-card-title");
+        const selectedColor = "success";
+        const notSelectedColor = "";
+
+        $(".jsToolCard").each(function () {
+            if ($(this).find('[data-control-type="enable"]').get(0).checked) {
+                $(this).find(".tool-card-config-save-bth").val($(this).find(".tool-card-config-save-bth").data("savetext"))
+            } else {
+                $(this).find(".tool-card-config-save-bth").val($(this).find(".tool-card-config-save-bth").data("enablesave"))
+            }
+        })
+    }
+
+    function hideEmptySettings() {
+        Array.from($(".tool-card-config-settings")).forEach(div => {
+            if ($(div).find('[data-option-type]').length === 0) {
+                $(div).hide();
+            }
+        });
+    }
+
+    function hookToolCardsCollapseEvents() {
+        $('.tool-card-config').on('hidden.bs.collapse', function (event) {
+            const parentNode = event.currentTarget.parentNode;
+            $(parentNode).find('.tool-card-title-collapse-text').eq(0).text('{{page_configure_tool_card_collapse_settings}}');
+            showToolDescInTitleSection(parentNode);
+        });
+
+        $('.tool-card-config').on('shown.bs.collapse', function (event) {
+            const parentNode = event.currentTarget.parentNode;
+            $(parentNode).find('.tool-card-title-collapse-text').eq(0).text('{{page_configure_tool_card_collapse_close}}');
+            showToolDescInTitleSection(parentNode);
+        });
+    }
+
+    function initEventListeners(){
+        $(".component-select").click(function (event) {
+
+            $("#"+$(this).data("textual-description")).closest(".textual-description-container").find(".textual-description").hide();
+            $("#"+$(this).data("textual-description")).show();
+
+        })
+    }
+
+    $(document).ready(function () {
+        //sortEngineFunctionsByEnabled();
+        setToolCardValues();
+        hideEmptySettings();
+        hookToolCardsCollapseEvents();
+        initEventListeners();
+    });
+
+    var feedBackTimer;
+
+    function ViewFeedback(text, type) {
+        clearInterval(feedBackTimer);
+        feedBackTimer = null;
+
+        var jsFeedbackViewer = $(".jsFeedbackViewer");
+
+        jsFeedbackViewer.removeClass("hide").removeClass("primary").removeClass("secondary").removeClass("alert").removeClass("success").removeClass("warning");
+        jsFeedbackViewer.addClass(type);
+        jsFeedbackViewer.find(".jsFeedbackViewerText").text(text);
+
+        feedBackTimer = setInterval(function () {
+            jsFeedbackViewer.fadeIn(function () {
+                jsFeedbackViewer.focus();
+            });
+
+            clearInterval(feedBackTimer);
+
+            if (type === "success") {
+                feedBackTimer = setInterval(function () {
+                    clearInterval(feedBackTimer);
+
+                    jsFeedbackViewer.fadeOut(function () {
+                        jsFeedbackViewer.addClass("hide");
+                    });
+                }, 10000);
+            }
+        }, 150);
+    }
+</script>
+
+<script>
+    $(document).foundation();
+</script>

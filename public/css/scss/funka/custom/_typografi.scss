@@ -1,0 +1,75 @@
+//
+// Variables
+//
+
+$font-bold: "Open Sans", Helvetica, Arial, sans-serif;
+
+
+//--------------------------------------------------------------*/
+// FUNKAs CSS
+//--------------------------------------------------------------*/
+
+// CSS FOR ALL DEVICES
+
+
+// Ingress
+.ingress {
+    font-size: 16px;
+    line-height: 1.35;
+    padding-top: 0.2rem;
+    max-width: 36rem;
+}
+
+// Header font
+h2, h3, h4 {
+    margin: 0;
+    font-weight: bold;
+}
+
+// ul + ol + li
+ul, ol {
+    padding-left: 0.5em;
+
+    li {
+        padding-left: 0.5em;
+        padding-bottom: 5px;
+    }
+
+    &.no-bullet, &.listing-border {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+
+        li {
+            padding-left: 0;
+        }
+    }
+
+    &.listing-border {
+        padding-left: 0;
+        margin: 1rem 0;
+        border-top: 1px solid $border-color;
+
+        li {
+            padding: 0.125rem 0;
+            border-bottom: 1px solid $border-color;
+        }
+    }
+}
+
+
+//--------------------------------------------------------------*/
+// CODE ABOVE IS FOR ALL SCREENS
+// MEDIA QUERIES BELOW IS FOR MEDIUM + LARGE OR JUST LARGE
+//--------------------------------------------------------------*/
+//--------------------------------------------------------------*/
+// MEDIUM + LARGE SCREEN
+@include breakpoint(medium) {
+
+}
+
+// LARGE SCREEN
+@include breakpoint(large) {
+
+
+}

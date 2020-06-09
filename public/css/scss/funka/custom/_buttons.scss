@@ -1,0 +1,79 @@
+//
+// Variables
+//
+
+// We use these to control button text styles.
+
+// We use these to controls background-color. Alert and success colors is in forms.scss
+
+
+//--------------------------------------------------------------*/
+// FUNKAs CSS
+//--------------------------------------------------------------*/
+
+// CSS FOR ALL DEVICES
+
+
+
+
+button, .button, input[type="button"], input[type="submit"] {
+    width: 100%;
+    @include button;
+    text-decoration: none;
+    outline: 1px solid $color-white;
+
+    &.button-settings {
+        background-image: url('../cssimg/icons-sprite.png');
+        background-repeat: no-repeat;
+        background-position: 8px 12px;
+        padding-left: 2.1rem;
+    }
+
+    &.tabbed {
+        box-shadow: 0 0 0px 3px $tabbed-color;
+    }
+
+    &.close-button {
+        background-color: transparent;
+        outline: none;
+        color: #333;
+        padding: 0.35em 0.6em;
+    }
+}
+
+a, input[type=text], textarea, select {
+
+    &.tabbed {
+        box-shadow: 0 0 0px 3px $tabbed-color;
+    }
+}
+
+.easy-reader-controls-container,
+.tab-slide-out-grid-item {
+    button {
+        background-color: $color-white;
+    }
+
+    .overlay-grid-item {
+        margin: 2px;
+    }
+}
+
+
+//--------------------------------------------------------------*/
+// CODE ABOVE IS FOR ALL SCREENS
+// MEDIA QUERIES BELOW IS FOR MEDIUM + LARGE OR JUST LARGE
+//--------------------------------------------------------------*/
+//--------------------------------------------------------------*/
+// MEDIUM + LARGE SCREEN
+@include breakpoint(medium) {
+
+    button, .button, input[type="button"], input[type="submit"] {
+        width: auto;
+    }
+}
+
+// LARGE SCREEN
+@include breakpoint(large) {
+
+}

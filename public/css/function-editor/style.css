@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    height: 100%;
+    overflow: auto;
+}
+#stage-parent{
+    clear: both;
+}
+#large-container {
+
+    overflow: hidden;
+}
+
+#scroll-container {
+    width: calc(80%);
+    height: calc(80vh);
+    overflow: auto;
+    float: left;
+}
+
+#component-config-container{
+    width: calc(20%);
+    height: calc(80vh);
+    float: left;
+}
+
+#footerMenu{
+    clear: left;
+}
+
+#container{
+    background-color: #f0f0f0;
+}
+
+#menu-container{
+    height:40px;
+
+}
+
+
+/* component - config - container */
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+
+#appmenu {
+
+    float: left;
+    margin: 0;
+    color: #fff;
+    background-color: #369;
+    font-size: 25px;
+    width: 100%;
+}
+
+#appmenu li {
+    z-index: 1000;
+    white-space: nowrap;
+    display:block;
+    padding: .25em .75em;
+    border: 1px solid #fff;
+}
+
+#appmenu > li {
+    float: left;
+    background-color: #036;
+    text-align: center;
+    position:relative;
+    cursor: pointer;
+}
+
+#appmenu :hover,
+#appmenu :focus {
+    background-color: #fff;
+    color: #036;
+    border: 1px solid #036;
+    text-decoration: underline;
+}
+
+#appmenu :hover li,
+#appmenu :focus li {
+    color: #fff;
+    background-color: #036;
+}
+
+#appmenu > li > ul {
+    display: none;
+    position:absolute;
+    left:0;
+    right:0;
+    top:100%;
+    padding:0;
+    margin:0;
+    background-color: #036;
+    min-width: 250px;
+    font-size: 24px;
+    text-align: left;
+}
+#appmenu > li > ul > {
+    width: 100%;
+}
+#appmenu > li[aria-expanded="true"] > ul {
+    display:inline-grid;
+
+}

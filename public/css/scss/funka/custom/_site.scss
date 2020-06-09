@@ -1,0 +1,207 @@
+﻿//
+// Variables
+//
+
+
+//--------------------------------------------------------------*/
+// FUNKAs CSS
+//--------------------------------------------------------------*/
+
+// CSS FOR ALL DEVICES
+
+
+/* GLOBAL
+--------------------------------------------------------------*/
+.wrapper {
+    padding: 2rem 0;
+}
+
+nav span {
+    font-size: 14px;
+}
+
+$checkbox-size: 2.25rem;
+
+.tool-card-title {
+
+    label {
+        display: inline-block;
+        line-height: $checkbox-size;
+        font-size: 17px;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        .bg-image {
+            background-image: url('/components/engines/dictionary/1.0/assets/dictionary.png');
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: cover;
+            display: inline-block;
+            width: 37px;
+            height: 37px;
+            vertical-align: bottom;
+            margin-right: 12px;
+        }
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.tool-card-config-settings {
+    width: 50%;
+}
+
+.tool-card-title-select {
+    display: flex;
+    flex-flow: row nowrap;
+
+
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: $checkbox-size;
+        height: $checkbox-size;
+        position: relative;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:after {
+            content: "\02714";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            color: #eee;
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: inset 0 0 0 2px #ddd;
+
+            font: {
+                size: 1.9rem;
+                weight: bolder;
+            }
+
+            line-height: 1.9rem;
+            text-align: center;
+            transition: background-color 350ms 0ms ease, color 350ms 250ms ease, font-size 350ms 250ms ease;
+        }
+
+        &:checked {
+            &:after {
+                color: $color-white;
+                background-color: $success-color;
+                box-shadow: inset 0 0 0 2px $success-color;
+            }
+        }
+
+        &.tabbed {
+            &:after {
+                //outline: 2px solid $tabbed-color;
+                box-shadow: 0 0 0px 3px $tabbed-color;
+            }
+
+            &:checked {
+                &:after {
+                    //outline: 2px solid $tabbed-color;
+                    box-shadow: 0 0 0px 3px $tabbed-color;
+                }
+            }
+        }
+    }
+
+
+    > * {
+        margin-right: 1rem;
+    }
+}
+
+.config-about-wrapper {
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.tool-card-config-settings {
+
+    .easyReaderColorize {
+        color: transparent !important;
+        background-color: transparent !important;
+    }
+
+    .config-data-option-colorCombination {
+        ul {
+            li.colorCombination-option-container:nth-child(1) {
+                label {
+                    color: $color-white !important;
+                    background-color: $color-black !important;
+                }
+            }
+
+            li.colorCombination-option-container:nth-child(2) {
+                label {
+                    color: #f9dc5c !important;
+                    background-color: #00006e !important;
+                }
+            }
+
+            li.colorCombination-option-container:nth-child(3) {
+                label {
+                    color: #333 !important;
+                    background-color: #f8f8f8 !important;
+                }
+            }
+
+            li.colorCombination-option-container:nth-child(4) {
+                label {
+                    color: #0000cc !important;
+                    background-color: $color-white !important;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+.config-data-option-colorCombination {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+}
+
+.colorCombination-option-container {
+    label {
+        padding: 8px 10px 8px 10px;
+        margin: 0 4px 0 4px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
+        min-width: 125px;
+        outline: 1px solid $color-white;
+    }
+}
+
+
+
+/* Page specific code
+--------------------------------------------------------------*/
+//--------------------------------------------------------------*/
+// CODE ABOVE IS FOR ALL SCREENS
+// MEDIA QUERIES BELOW IS FOR MEDIUM + LARGE OR JUST LARGE
+//--------------------------------------------------------------*/
+//--------------------------------------------------------------*/
+// MEDIUM + LARGE SCREEN
+@include breakpoint(medium) {
+}
+// LARGE SCREEN
+@include breakpoint(large) {
+}

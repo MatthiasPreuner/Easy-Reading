@@ -1,0 +1,144 @@
+// Foundation for Sites by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+////
+/// @group card
+////
+
+/// Defualt background color.
+/// @type Color
+$tool-card-background: $white !default;
+
+/// Default font color for cards.
+/// @type Color
+$tool-card-font-color: $body-font-color !default;
+
+/// Default background.
+/// @type Color
+$tool-card-divider-background: $light-gray !default;
+
+/// Default border style.
+/// @type List
+$tool-card-border: 1px solid $light-gray !default;
+
+/// Default card shadow.
+/// @type List
+$tool-card-shadow: none !default;
+
+/// Default border radius.
+/// @type List
+$tool-card-border-radius: $global-radius !default;
+
+/// Default padding.
+/// @type Number
+$tool-card-padding: $global-padding !default;
+
+/// Default bottom margin.
+/// @type number
+$tool-card-margin-bottom: $global-margin !default;
+
+/// Adds styles for a card container.
+/// @param {Color} $background - Background color of the card.
+/// @param {Color} $color - font color of the card.
+/// @param {Number} $margin - Bottom margin of the card.
+/// @param {List} $border - Border around the card.
+/// @param {List} $radius - border radius of the card.
+/// @param {List} $shadow - box shadow of the card.
+@mixin tool-card-container( $background: $tool-card-background, $color: $tool-card-font-color, $margin: $tool-card-margin-bottom, $border: $tool-card-border, $radius: $tool-card-border-radius, $shadow: $tool-card-shadow ) {
+    @if $global-flexbox {
+        //display: flex;
+        //flex-direction: column;
+        //flex-grow: 1;
+    }
+
+    margin-bottom: $margin;
+    border: $border;
+    border-radius: $radius;
+    background: $background;
+    box-shadow: $shadow;
+    overflow: hidden;
+    color: $color;
+    padding: $tool-card-padding;
+
+
+
+    & > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+/// Adds styles for a card divider.
+@mixin tool-card-divider(
+  $padding: $tool-card-padding
+) {
+  @if $global-flexbox {
+    //flex: 0 1 auto;
+    //display: flex;
+  }
+
+  padding: 1rem ;
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/// Adds styles for a card section.
+@mixin tool-card-section(
+  $padding: $tool-card-padding
+) {
+  @if $global-flexbox {
+    flex: 1 0 auto;
+  }
+
+  padding: $padding;
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin foundation-card {
+    .card {
+        @include tool-card-container;
+    }
+
+    .tool-card-divider, .tool-card-divider-no-padding {
+        @include tool-card-divider;
+
+        &.tightup-tool-card-divider-top {
+            padding-top: 8px;
+        }
+
+        &.tightup-tool-card-divider-tight-top {
+            padding-top: 5px;
+        }
+
+        &.tightup-tool-card-divider-bottom {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
+
+    .tool-card-divider-no-padding {
+        padding: 0;
+    }
+
+    .tool-card-section {
+        @include tool-card-section;
+    }
+    // For IE 11 - Flexbug
+    // https://github.com/philipwalton/flexbugs/issues/75
+    .tool-card-image {
+        min-height: 1px;
+    }
+}
+
+@include breakpoint(medium) {
+
+
+    div .tool-card-divider {
+        padding: 1rem 4rem;
+    }
+}
