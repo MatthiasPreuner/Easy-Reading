@@ -1,4 +1,4 @@
-# EasyReading-dev
+# EasyReading
 
 The EasyReading framework acts as a centralized cloud service that hosts the user profile and an extendable amount of engines that can convert content into another easier to understand or alternative form. 
 
