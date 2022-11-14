@@ -748,5 +748,16 @@
 	"privacy_policy_easy": "Datenschutzerklärung in leichter Sprache",
 	"questions_about_project": "Für Fragen, Vorschläge und Kommentare zu dem Projekt kontaktieren Sie bitte",
 	"website_contact": "Zusätzliche Informationen zum Projekt und dem Konsortium können auf der Projektwebseite gefunden werden",
-	"leave_site_info_text": "Sie können diese Seite jederzeit verlassen."
+	"leave_site_info_text": "Sie können diese Seite jederzeit verlassen.",
+	"Clickable": "Clickable",
+	"Mark clickable objects according to your favorite setting": "Mark clickable objects according to your favorite setting",
+	"clickable.1.0.clickable.data-option.colorCombination.label": "clickable.1.0.clickable.data-option.colorCombination.label",
+	"clickable.1.0.clickable.title": "clickable.1.0.clickable.title",
+	"clickable.1.0.clickable.description": "clickable.1.0.clickable.description",
+	"clickable.1.0.clickable.source-title": "clickable.1.0.clickable.source-title",
+	"clickable.1.0.clickable.source-url": "clickable.1.0.clickable.source-url",
+	"clickable.1.0.clickable.howToUse": "clickable.1.0.clickable.howToUse",
+	"engine_clickable_intro_text": "engine_clickable_intro_text",
+	"engine_clickable_instruction_1": "engine_clickable_instruction_1",
+	"engine_clickable_instruction_2": "engine_clickable_instruction_2"
 }

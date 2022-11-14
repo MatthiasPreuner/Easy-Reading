@@ -607,5 +607,16 @@
 	"privacy_policy_easy": "Hantering av personuppgifter på lättläst text",
 	"questions_about_project": "Om du har frågor, kommentarer eller förslag, kontakta oss:",
 	"website_contact": "Mer information om projektet och konsortiet hittar du på projektets webbplats:",
-	"leave_site_info_text": "Du kan lämna den här sidan när du vill"
+	"leave_site_info_text": "Du kan lämna den här sidan när du vill",
+	"Clickable": "Clickable",
+	"Mark clickable objects according to your favorite setting": "Mark clickable objects according to your favorite setting",
+	"clickable.1.0.clickable.data-option.colorCombination.label": "clickable.1.0.clickable.data-option.colorCombination.label",
+	"clickable.1.0.clickable.title": "clickable.1.0.clickable.title",
+	"clickable.1.0.clickable.description": "clickable.1.0.clickable.description",
+	"clickable.1.0.clickable.source-title": "clickable.1.0.clickable.source-title",
+	"clickable.1.0.clickable.source-url": "clickable.1.0.clickable.source-url",
+	"clickable.1.0.clickable.howToUse": "clickable.1.0.clickable.howToUse",
+	"engine_clickable_intro_text": "engine_clickable_intro_text",
+	"engine_clickable_instruction_1": "engine_clickable_instruction_1",
+	"engine_clickable_instruction_2": "engine_clickable_instruction_2"
 }

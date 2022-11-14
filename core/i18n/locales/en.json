@@ -741,5 +741,16 @@
 	"privacy_policy_easy": "Privacy policy in plain language",
 	"questions_about_project": "If you have any questions, comments, suggestions about the EasyReading project, feel free to contact us",
 	"website_contact": "More information about the project and the consortium can be found on the project website",
-	"leave_site_info_text": "You can leave this page anytime."
+	"leave_site_info_text": "You can leave this page anytime.",
+	"Clickable": "Clickable",
+	"Mark clickable objects according to your favorite setting": "Mark clickable objects according to your favorite setting",
+	"clickable.1.0.clickable.data-option.colorCombination.label": "clickable.1.0.clickable.data-option.colorCombination.label",
+	"clickable.1.0.clickable.title": "clickable.1.0.clickable.title",
+	"clickable.1.0.clickable.description": "clickable.1.0.clickable.description",
+	"clickable.1.0.clickable.source-title": "clickable.1.0.clickable.source-title",
+	"clickable.1.0.clickable.source-url": "clickable.1.0.clickable.source-url",
+	"clickable.1.0.clickable.howToUse": "clickable.1.0.clickable.howToUse",
+	"engine_clickable_intro_text": "engine_clickable_intro_text",
+	"engine_clickable_instruction_1": "engine_clickable_instruction_1",
+	"engine_clickable_instruction_2": "engine_clickable_instruction_2"
 }
