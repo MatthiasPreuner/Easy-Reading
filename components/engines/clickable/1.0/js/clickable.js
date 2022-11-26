@@ -1,10 +1,8 @@
 let easyReadingClickableEnabled = false;
 function clickable(req, config, widget) {
   if (easyReadingClickableEnabled) {
-    $("*").removeClass("easyReaderClickable");
+    $("*").remove(".clickable-wrapers");
   } else {
-    console.log("enabled"); //need to delete
-
     window.scrollTo(0, 0);
     var bodyRect = document.body.getBoundingClientRect();
 
@@ -47,15 +45,11 @@ function clickable(req, config, widget) {
     // Lets create a floating border on top of these elements that will always be visible
     items.forEach(function (item) {
       newElement = document.createElement("div");
-      newElement.style.outline = "2px dashed rgba(255,0,0,.75)";
-      newElement.style.position = "absolute";
       newElement.style.left = item.rect.left + "px";
       newElement.style.top = item.rect.top + "px";
       newElement.style.width = item.rect.right - item.rect.left + "px";
       newElement.style.height = item.rect.bottom - item.rect.top + "px";
-      newElement.style.pointerEvents = "none";
-      newElement.style.boxSizering = "border-box";
-      newElement.style.zIndex = 2147483647;
+      newElement.className = "clickable-wrapers";
       document.body.appendChild(newElement);
     });
   }
