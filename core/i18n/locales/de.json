@@ -759,5 +759,16 @@
 	"clickable.1.0.clickable.howToUse": "clickable.1.0.clickable.howToUse",
 	"engine_clickable_intro_text": "engine_clickable_intro_text",
 	"engine_clickable_instruction_1": "engine_clickable_instruction_1",
-	"engine_clickable_instruction_2": "engine_clickable_instruction_2"
+	"engine_clickable_instruction_2": "engine_clickable_instruction_2",
+	"border color": "border color",
+	"engine_page-elements_intro_text": "engine_page-elements_intro_text",
+	"engine_page-elements_instruction_1": "engine_page-elements_instruction_1",
+	"engine_page-elements_instruction_2": "engine_page-elements_instruction_2",
+	"Page Elements": "Page Elements",
+	"page-elements.1.0.page-elements.title": "page-elements.1.0.page-elements.title",
+	"page-elements.1.0.page-elements.description": "page-elements.1.0.page-elements.description",
+	"page-elements.1.0.page-elements.source-title": "page-elements.1.0.page-elements.source-title",
+	"page-elements.1.0.page-elements.source-url": "page-elements.1.0.page-elements.source-url",
+	"page-elements.1.0.page-elements.howToUse": "page-elements.1.0.page-elements.howToUse",
+	"Show lists of important page elements, sorted by their type.": "Show lists of important page elements, sorted by their type."
 }
