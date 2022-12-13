@@ -88,7 +88,7 @@ class Clickable extends base.EngineBase{
                 id : "clickable",
                 name: "Clickable",
                 description : "Mark clickable objects according to your favorite setting",
-                defaultIcon : "assets/clickable.png",
+                defaultIcon : "assets/clickable-full.png",
                 includeInDefaultProfile: true,
                 states: 2,
                 supportedLanguages: [],
