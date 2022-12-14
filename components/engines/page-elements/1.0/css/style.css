@@ -34,6 +34,11 @@ nav label {
     border-right: 1px solid silver;
     background: hsl(210,50%,50%);
     color: #eee;
+    cursor: pointer;
+ }
+
+ nav label[for="close"] {
+    float: right;
  }
  
  nav label:nth-child(1) { border-left: 1px solid silver; }
