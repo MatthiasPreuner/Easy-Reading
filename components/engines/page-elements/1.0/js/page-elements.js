@@ -47,7 +47,7 @@ function pageElements(req, config, widget) {
         <label for="tab1">Headers</label>
         <label for="tab2">Links</label>
         <label for="tab3">Clickable Objects</label>
-        <label for="close" data-micromodal-close="er-structure">x</label>
+        <label for="close" data-micromodal-close="er-structure" onclick="setTimeout(() => $('#er-structure').remove(), 300)">x</label>
     </nav>
     
     <figure>
