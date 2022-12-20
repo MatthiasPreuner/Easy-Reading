@@ -73,6 +73,11 @@ nav label {
     overflow-y: auto;
 }
 
+.page-elements-list * img,
+.page-elements-list * svg {
+    height: 20px;
+}
+
 .page-elements-header-div{
     background-color: hsl(210,50%,50%);
     color: #eee;

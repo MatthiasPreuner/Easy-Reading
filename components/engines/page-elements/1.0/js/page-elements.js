@@ -2,6 +2,9 @@
 
 function pageElements(req, config, widget) {
 
+    // reset
+    $('#page-elements').remove();
+
     /**
      * Check if the current html element is currently visible per the browser computed styles
      * @param element {Element}
@@ -21,40 +24,90 @@ function pageElements(req, config, widget) {
         return true;
     }
 
-    // reset
-    $('#er-structure').remove();
+    function isEmtpy(element) {
+        return element.innerHTML.trim() === "";
+    }
 
-    // find all headers
+    function isSidebar(element) {
+        return $(this).parents('.easy-reading-interface').length || $(element).hasClass('easy-reading-interface');
+    }
+
+    function isLandmark(element) {
+        return element.href.includes(window.location.href.replace(window.location.hash,"").replace('#','') + '#');
+    }
+
     const headers = [...document.querySelectorAll("h1,h2,h3,h4,h5,h6").values()]
-        .filter(element => isVisible(element) && element.innerHTML.trim() !== "")
+        .filter(element => isVisible(element) && !isEmtpy(element) && !isSidebar(element))
         .map(function (element) {
             const lvl = Number(element.tagName.substring(1))
             return `<li><span class="page-elements-header-div header-${lvl}">${element.tagName}</span> ${element.innerHTML}</li>`
         }).join('');
 
-    // find all links
-    const links = [...document.querySelectorAll("a").values()]
-        .filter(element => isVisible(element) && element.innerHTML.trim() !== "")
+    // find all landmarks
+    const landmarks = [...document.querySelectorAll("a").values()]
+        .filter(element => isVisible(element) && !isEmtpy(element) && !isSidebar(element))
+        .filter(element => isLandmark(element))
         .map(function (element) {
             // https://stackoverflow.com/questions/2161634/how-to-check-if-element-has-any-children-in-javascript
-            if (element.hasChildNodes()) {
-                // if(element.querySelectorAll("img")){
-
-                // }
-                //if (element.firstElementChild())
-
-                // if image, remove or make smaller TODO
-                if (element.innerHTML.tagName === "img") {
-                    return `<li><a href=${element.href}>${element.innerHTML.alt}</a></li>`
+                if(element.querySelectorAll("img").length > 0){
+                    var images = [...element.querySelectorAll("img").values()]
+                    return `
+                    <li>
+                        <a href=${element.href}>
+                            ${images[0].outerHTML} ${images[0].alt}
+                        </a>
+                    </li>`
                 }
-                // fixme: question from Chris, probably to Matthias: is there an 'else' block missing?
-            }
-
-            return `<li><a href=${element.href}>${element.innerHTML}</a></li>`
+                // default
+                return `
+                    <li>
+                        <a href=${element.href}>
+                            ${element.innerHTML}
+                        </a>
+                    </li>`
         }).join('');
 
-    // find all clickable??
+    
+        const links = [...document.querySelectorAll("a").values()]
+        .filter(element => isVisible(element) && !isEmtpy(element) && !isSidebar(element))
+        .filter(element => !isLandmark(element))
+        .map(function (element) {
+            // https://stackoverflow.com/questions/2161634/how-to-check-if-element-has-any-children-in-javascript
+                
+                var newTab = ""
+                if(element.target==="_blank"){
+                    newTab = " - Opens in a new Tab"
+                }
 
+                if(element.querySelectorAll("picture").length > 0){
+                    var images = [...element.querySelectorAll("picture").values()]
+                    // console.log(   `<a href=${element.href}>
+                    //     ${images[0].outerHTML} ${images[0].alt} - ${element.href}
+                    // </a>`)
+                    return `
+                    <li>
+                        <a href='${element.href}' target='${element.target}'>
+                            ${images[0].outerHTML}${newTab}
+                        </a>
+                    </li>`
+                }
+
+                if(element.querySelectorAll("img").length > 0){
+                    var images = [...element.querySelectorAll("img").values()]
+                    return `
+                    <li>
+                        <a href=${element.href} target='${element.target}'>
+                            ${images[0].outerHTML} ${images[0].alt}${newTab}
+                        </a>
+                    </li>`
+                }
+                // currently no better solution
+                return `<li>
+                            <a href='${element.href}' target='${element.target}'>
+                                ${element.innerHTML}${newTab}
+                            </a>
+                        </li>`
+        }).join('');
 
     // language=HTML
     const layoutHTML =
@@ -66,10 +119,10 @@ function pageElements(req, config, widget) {
 
                 <nav>
                     <label for="tab1">Headers</label>
-                    <label for="tab2">Links</label>
-                    <label for="tab3">Clickable Objects</label>
-                    <label for="close" data-micromodal-close="er-structure"
-                           onclick="setTimeout(() => $('#er-structure').remove(), 300)">x</label>
+                    <label for="tab2">Landmarks</label>
+                    <label for="tab3">Links</label>
+                    <label for="close" data-micromodal-close="page-elements"
+                           onclick="setTimeout(() => $('#page-elements').remove(), 300)">x</label>
                 </nav>
 
                 <figure>
@@ -77,7 +130,7 @@ function pageElements(req, config, widget) {
                         <ul class="page-elements-list">${headers}</ul>
                     </div>
                     <div class="tab2">
-                        <ul class="page-elements-list">${links}</ul>
+                        <ul class="page-elements-list">${landmarks}</ul>
                     </div>
                     <div class="tab3">
                         <ul class="page-elements-list">${links}</ul>
@@ -85,22 +138,10 @@ function pageElements(req, config, widget) {
                 </figure>
             </div>`
 
-    // noinspection JSUnusedLocalSymbols
-    const test =
-        `<div class="micromodal-slide modal is-open" id="modal-2" aria-hidden="false">
-  <div class="modal__overlay" tabindex="-1" data-custom-close="">
-    <div class="modal__container w-40-ns w-90" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
-    
-    </div>
-  </div>
-</div>
-`
-
-
     // language=HTML
     const formHTML = `
-        <div class="modal micromodal-slide page-elements-modal" id="er-structure" aria-hidden="true">
-            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal micromodal-slide page-elements-modal" id="page-elements" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1">
                 <div class="modal__container" role="dialog" aria-modal="true" style="overflow-y: auto">
                     <style>
                         /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -166,5 +207,5 @@ function pageElements(req, config, widget) {
         </div>`;
 
     $("body").append(formHTML);
-    MicroModal.show('er-structure');
+    MicroModal.show('page-elements');
 }
