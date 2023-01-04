@@ -1,0 +1,7 @@
+.clickable-wrapers {
+    position: absolute;
+    box-sizing: border-box;
+    outline: 4px solid #0000FF;
+    pointer-events: none;
+    z-index: 2147483647;
+}

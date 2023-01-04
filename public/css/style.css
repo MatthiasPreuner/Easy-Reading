@@ -152,16 +152,3 @@ footer .ec_flag{
     margin:auto;
     display: block;
 }
-
-/* 
-Style for the Clickable plugin
-
-*/
-
-.clickable-wrapers {
-    position: absolute;
-    box-sizing: border-box;
-    outline: 2px dashed rgba(255,0,0,.75);
-    pointer-events: none;
-    z-index: 2147483647;
-}

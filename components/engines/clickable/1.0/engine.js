@@ -36,7 +36,7 @@ class Clickable extends base.EngineBase{
                     "outputType" : ioType.IOTypes.VoidIOType.className,
                 }],
                 javaScripts:['/js/clickable.js'],
-                styleSheets : [],
+                styleSheets : ['/css/style.css'],
                 toolCategory: base.EngineFunction.ToolCategories.Layout,
                 entryPoint: "clickable",
             }

@@ -6,8 +6,47 @@ function clickable(req, config, widget) {
     window.scrollTo(0, 0);
     var bodyRect = document.body.getBoundingClientRect();
 
+    /**
+     * Check if the current html element is currently visible per the browser computed styles
+     * @param element {Element}
+     * @return boolean
+     */
+    function isVisible(item) {
+      var element = item.element;
+
+      try {
+        const computedStyles = getComputedStyle(element);
+
+        if (
+          computedStyles["display"] === "none" ||
+          computedStyles["display"] === "invisible" ||
+          computedStyles["visibility"] === "hidden"
+        )
+          return false;
+        if (computedStyles["height"] == 0 && computedStyles["width"] == 0)
+          return false;
+        if (computedStyles["opacity"] == 0) return false;
+
+        // check if bounding rectangle has any size
+        const rect = element.getBoundingClientRect();
+        if (rect.width == 0 || rect.height == 0) return false;
+
+        return true;
+      } catch (error) {
+        console.log(error, element);
+        throw error;
+      }
+    }
+
+    function isSidebar(item) {
+      const element = item.element;
+      return (
+        $(element).parents(".easy-reading-interface").length ||
+        $(element).hasClass("easy-reading-interface")
+      );
+    }
     var items = Array.prototype.slice
-      .call(document.querySelectorAll("*"))
+      .call(document.querySelectorAll("body *"))
       .map(function (element) {
         var rect = element.getBoundingClientRect();
         return {
@@ -16,7 +55,7 @@ function clickable(req, config, widget) {
             element.tagName === "BUTTON" ||
             element.tagName === "A" ||
             element.onclick != null ||
-            window.getComputedStyle(element).cursor == "pointer",
+            getComputedStyle(element).cursor == "pointer",
           rect: {
             left: Math.max(rect.left - bodyRect.x, 0),
             top: Math.max(rect.top - bodyRect.y, 0),
@@ -35,7 +74,8 @@ function clickable(req, config, widget) {
           (item.rect.right - item.rect.left) *
             (item.rect.bottom - item.rect.top) >=
             20
-      );
+      )
+      .filter((element) => isVisible(element) && !isSidebar(element));
 
     // Only keep inner clickable items
     items = items.filter(
