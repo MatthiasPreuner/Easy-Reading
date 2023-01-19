@@ -45,6 +45,7 @@ function clickable(req, config, widget) {
         $(element).hasClass("easy-reading-interface")
       );
     }
+    //https://gist.github.com/iiLaurens/81b1b47f6259485c93ce6f0cdd17490a
     var items = Array.prototype.slice
       .call(document.querySelectorAll("body *"))
       .map(function (element) {
